@@ -1,0 +1,17 @@
+
+@import 'variables.scss';
+h1{
+    color:$colour;
+  }
+  h3{
+      color: $orange;
+  }
+input{
+    background-color : $cyan;
+    color:$blue;
+
+}
+
+div{
+    background-color: $teal;
+}
