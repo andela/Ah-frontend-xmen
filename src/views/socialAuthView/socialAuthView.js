@@ -13,48 +13,48 @@ export class SocialAuthView extends Component {
       localStorage.setItem('username', nextprops.socialAuthState.payload.user.username);
       setTimeout(() => {
         window.location.reload();
-      }, 3000);
+      }, 6000);
       toast.success(`Successully Logged in as ${nextprops.socialAuthState.payload.user.username}`);
     } else {
       toast.error('!Oops An Error occurred Please Try Again Later');
     }
   }
 
-    handleFacebookReponse=(response) => {
-      const { facebookSignInAction } = this.props;
-      if (response.accessToken) {
-        facebookSignInAction(response.accessToken);
-      }
+  handleFacebookReponse = (response) => {
+    const { facebookSignInAction } = this.props;
+    if (response.accessToken) {
+      facebookSignInAction(response.accessToken);
     }
+  }
 
-    handleGoogleResponseSuccess=(response) => {
-      const { googleSignInAction } = this.props;
-      if (response.tokenId) {
-        googleSignInAction(response.tokenId);
-      }
+  handleGoogleResponseSuccess = (response) => {
+    const { googleSignInAction } = this.props;
+    if (response.tokenId) {
+      googleSignInAction(response.tokenId);
     }
+  }
 
-    handlegoogleResponseFailure=(response) => {
-      toast.error(response.error);
-      const { googleSignInAction } = this.props;
-      googleSignInAction('invalid request');
-    }
+  handlegoogleResponseFailure = (response) => {
+    toast.error(response.error);
+    const { googleSignInAction } = this.props;
+    googleSignInAction('invalid request');
+  }
 
 
-    render() {
-      return (
-        <div>
-          <ToastContainer />
-          <SocialAuth
-            id="socialAuth"
-            responseFacebook={this.handleFacebookReponse}
-            googleResponseSuccess={this.handleGoogleResponseSuccess}
-            googleResponseFailure={this.handlegoogleResponseFailure}
-          />
-        </div>
+  render() {
+    return (
+      <div>
+        <ToastContainer />
+        <SocialAuth
+          id="socialAuth"
+          responseFacebook={this.handleFacebookReponse}
+          googleResponseSuccess={this.handleGoogleResponseSuccess}
+          googleResponseFailure={this.handlegoogleResponseFailure}
+        />
+      </div>
 
-      );
-    }
+    );
+  }
 }
 
 export const mapStateToProps = state => ({
