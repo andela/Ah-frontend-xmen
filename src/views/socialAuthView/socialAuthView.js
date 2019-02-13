@@ -29,7 +29,6 @@ export class SocialAuthView extends Component {
     }
 
     handleGoogleResponseSuccess=(response) => {
-      
       const { googleSignInAction } = this.props;
       if (response.tokenId) {
         googleSignInAction(response.tokenId);

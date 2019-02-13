@@ -3,6 +3,10 @@
 html, body{
     margin: 0;
     padding: 0;
+    height: 100%;
+    // position: relative;
+    min-height: 100%;
+    
 }
 
 a{
@@ -153,6 +157,10 @@ h4{
 .footer{
     clear: both;
     text-align: center;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    // position: absolute;
 }
 
 @media (min-width: 320px) and (max-width: 480px)
@@ -173,4 +181,7 @@ h4{
         width: 100%;
         float: none;
     }
+}
+.message-box {
+    margin-bottom: 350px !important;
 }
