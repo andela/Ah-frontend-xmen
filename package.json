@@ -19,13 +19,14 @@
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-router-dom": "^4.3.1",
+    "argon-design-system-free": "^1.0.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
@@ -78,4 +79,3 @@
   },
   "homepage": "https://github.com/andela/Ah-frontend-xmen#readme"
 }
-
