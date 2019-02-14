@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Parser from 'html-react-parser';
 import LikeButtonView from '../../views/Buttons/LikeButtonView';
 import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
+import EditButton from '../../views/articleEditorView/EditArticleButton';
+import DeleteButton from '../../views/articleEditorView/DeleteArticleButton';
 
 const slug = localStorage.getItem('slug');
 function parseDate(dateString) {
@@ -47,10 +49,33 @@ const ArticleComponent = props => (
   &middot;
             {props.read_time}
           </p>
-
         </div>
 
       </Link>
+      <div className="mb-4">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <EditButton
+                  onClick={props.onClick}
+                  slug={props.slug}
+                  username={props.author.username}
+                />
+
+              </td>
+              <td>
+                <DeleteButton
+                  onClick={props.onClick}
+                  slug={props.slug}
+                  username={props.author.username}
+                />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div className="img-respoonsive w-100">
         {parseImage(props.image)}
       </div>

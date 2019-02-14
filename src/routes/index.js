@@ -7,8 +7,9 @@ import PasswordResetView from '../views/PasswordResetView';
 import ProfileView from '../views/ProfileView';
 import UpdateView from '../views/UpdateView';
 import ReportArticleView from '../views/ReportArticleView';
-
 import ArticleReadView from '../views/ArticleReadView';
+import EditArticleView from '../views/articleEditorView/EditArticleView';
+import CreateArticleView from '../views/articleEditorView/CreateArticleView';
 
 const Routes = () => (
   <Router>
@@ -22,6 +23,8 @@ const Routes = () => (
       <Route path="/profile/edit" exact strict component={UpdateView} />
       <Route path="/article/:slug" exact strict component={ArticleReadView} />
       <Route path="/article/:slug/report" exact strict component={ReportArticleView} />
+      <Route path="/editor" exact strict component={CreateArticleView} />
+      <Route path="/editor/:slug" exact strict component={EditArticleView} />
       <Footer />
 
     </div>
