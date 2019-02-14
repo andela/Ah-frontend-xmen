@@ -4,3 +4,10 @@ const ActionTypes = {
 };
 
 export default ActionTypes;
+export const FACEBOOK_SIGNIN_SUCCESS = 'FACEBOOK_SIGNIN_SUCCESS';
+
+export const FACEBOOK_SIGNIN_FAIL = 'FACEBOOK_SIGNIN_FAIL';
+
+export const GOOGLE_SIGNIN_SUCCESS = 'GOOGLE_SIGNIN_SUCCESS';
+
+export const GOOGLE_SIGNIN_FAIL = 'GOOGLE_SIGNIN_FAIL';
