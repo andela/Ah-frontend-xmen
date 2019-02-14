@@ -16,7 +16,10 @@
       "ecmaVersion": 6
     },
     "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/destructuring-assignment": [0,"never"],
+      "react/prop-types": [0],
+      "no-param-reassign":["error", { "props": false }],
+      "import/no-named-as-default": 0
     }
-   
 }
