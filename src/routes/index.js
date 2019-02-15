@@ -5,6 +5,8 @@ import HomeView from '../views/HomeView';
 import Header from '../components/Shared/Header';
 import Footer from '../components/Shared/Footer';
 import PasswordResetView from '../views/PasswordResetView';
+import ProfileView from '../views/ProfileView';
+import UpdateView from '../views/UpdateView';
 
 
 const Routes = () => (
@@ -15,6 +17,8 @@ const Routes = () => (
       <Route path="/login" exact strict component={LoginView} />
       <Route path="/password-reset" exact strict component={PasswordResetView} />
       <Route path="/password-reset/:token" exact strict component={PasswordResetView} />
+      <Route path="/profile" exact strict component={ProfileView} />
+      <Route path="/profile/edit" exact strict component={UpdateView} />
       <Footer />
     </div>
   </Router>

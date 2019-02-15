@@ -1,17 +1,86 @@
 *{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
+html, body{
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
 }
-
 .section{
-    width: 100%;
-    background-image: url(https://res.cloudinary.com/soultech/image/upload/v1550683268/authors%20haven%20pics/books-knowledge.jpg);
-    background-repeat: no-repeat;
-    height: 550px;
-    background-size: cover;
+  width: 100%;
+  background-image: url(https://res.cloudinary.com/soultech/image/upload/v1550683268/authors%20haven%20pics/books-knowledge.jpg);
+  background-repeat: no-repeat;
+  height: 550px;
+  background-size: cover;
+} 
+.wrapper {
+  width: 65% !important;
+  margin: 50px auto !important;
+
+}
+.profile-text {
+  height: 300px;
+  width: 50%;
+  float: left;
+  text-align: justify;
+}
+.dp{
+  width: 320px;
+  float: right;
+}
+.profile-text h1 {
+  font-size: 37px;
+  color: #6457dd;
+  font-family: 'Patua One', cursive !important;
+  font-weight: bold;
+}
+.profile-text h3 {
+  font-size: 17px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  color: #1d1d1d;
+}
+
+@media (min-width: 768px) and (max-width: 1030px){
+  .wrapper {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .profile-info{
+    width:100%;
+    float: center;
+    margin: 0;
+  }
+
+  .profile-text {
+    width: 70%;
+    margin: 0 auto;
+    float: center;
+    text-align: center;
+  }
+  .dp{
+    float: none;
+    margin: 0 50px;
+  }
+
+}
+
+ @media (min-width: 481px) and (max-width: 767px) {
+
+  .dp{
+    width: 250px;
+    float: none;
+  }
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .dp{
+    float: none;
+    width: 200px;
+    margin: 0 50px;
+  }
+
 }
 
