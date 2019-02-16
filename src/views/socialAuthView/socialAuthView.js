@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import SocialAuth from '../../components/socialAuth/socialAuth';
 import googleSignInAction from '../../actions/socialActions/googleAction';
@@ -13,8 +12,8 @@ export class SocialAuthView extends Component {
       localStorage.setItem('token', nextprops.socialAuthState.token);
       localStorage.setItem('username', nextprops.socialAuthState.payload.user.username);
       setTimeout(() => {
-        this.props.history.push('/');
-      }, 800);
+        window.location.reload();
+      }, 3000);
       toast.success(`Successully Logged in as ${nextprops.socialAuthState.payload.user.username}`);
     } else {
       toast.error('!Oops An Error occurred Please Try Again Later');
@@ -62,5 +61,5 @@ export const mapStateToProps = state => ({
   socialAuthState: state.socialAuthReducer,
 });
 
-export default withRouter(connect(mapStateToProps,
-  { googleSignInAction, facebookSignInAction })(SocialAuthView));
+export default connect(mapStateToProps,
+  { googleSignInAction, facebookSignInAction })(SocialAuthView);

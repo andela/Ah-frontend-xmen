@@ -20,6 +20,8 @@
       "react/destructuring-assignment": [0,"never"],
       "react/prop-types": [0],
       "no-param-reassign":["error", { "props": false }],
-      "import/no-named-as-default": 0
+      "no-shadow": "off",
+      "import/no-named-as-default": 0,
+      "function-paren-newline": ["error", "consistent"]
     }
 }

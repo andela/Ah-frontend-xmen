@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 const socialAuthButtons = props => (
   <div id="social-button">
-    <p className="text-dark">Login with Social</p>
 
     <FacebookLogin
       appId={process.env.appId}
