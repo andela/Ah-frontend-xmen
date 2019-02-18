@@ -16,7 +16,6 @@ export class Articles extends Component {
       }
       return (
         <ArticleCard key={article.slug} {...article} />
-
       );
     });
 
@@ -31,7 +30,7 @@ export class Articles extends Component {
                   <div className="input-group input-group-alternative float-right search">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i className="ni ni-zoom-split-in" />
+                        <i className="fa fa-search" aria-hidden="true" />
                       </span>
                     </div>
                     <input

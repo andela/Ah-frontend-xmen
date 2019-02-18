@@ -7,8 +7,6 @@ import './assets/css/style.css';
 import './assets/style.scss';
 import '../node_modules/argon-design-system-free/assets/css/argon.css';
 import './assets/css/socialAuth.css';
-import 'react-toastify/dist/ReactToastify.css';
-
 
 ReactDOM.render(
   <Provider store={store}>
