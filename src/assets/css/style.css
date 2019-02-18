@@ -51,9 +51,13 @@ html, body{
 #report{
   color: red;
 }
-#report:hover{
+#report:hover, #bookmark:hover{
   cursor: pointer;
 }
+/* .tabs{
+  margin-top: 900px;
+} */
+
 @media (min-width: 768px) and (max-width: 1030px){
   .wrapper {
     width: 70%;
@@ -150,6 +154,12 @@ html, body{
 
 .article-items{
   display: inline;
+}
+.tabs{
+  width: 70%;
+    margin: 0 auto;
+    float: left;
+    text-align: center;
 }
 
 /* the dropdown css */

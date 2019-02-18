@@ -11,6 +11,7 @@ import authReducer from './authReducer';
 import likeArticleReducer from './LikeArticleReducer';
 import reportReducer from './reportReducer';
 import articleEditorReducer from './articleEditorReducer';
+import bookmarkListReducer from './bookmarkListReducer';
 
 
 export default combineReducers({
@@ -26,4 +27,5 @@ export default combineReducers({
   likeArticleReducer,
   reportReducer,
   articleEditorReducer,
+  bookmarkListReducer,
 });

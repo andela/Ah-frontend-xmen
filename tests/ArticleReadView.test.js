@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { toast } from 'react-toastify';
 import { ArticleReadView, mapStateToProps } from '../src/views/ArticleReadView';
 
 
@@ -8,6 +9,7 @@ describe('ArticleReadView', () => {
     const props = {
       article: {
         title: 'test title',
+        author: 'blash',
       },
       loading: false,
       match: {
@@ -15,7 +17,15 @@ describe('ArticleReadView', () => {
           slug: 'slug-as12',
         },
       },
+      authState: {
+        IsAuth: true,
+      },
       getSingleArticle: jest.fn(),
+      bookmarkListing: jest.fn(),
+      bookmarkState: {
+        successMessage: '',
+        errorMessage: '',
+      },
     };
     const instance = shallow(<ArticleReadView {...props} />);
     instance.setProps({
@@ -35,7 +45,11 @@ describe('ArticleReadView', () => {
           slug: 'slug-as12',
         },
       },
+      authState: {
+        IsAuth: true,
+      },
       getSingleArticle: jest.fn(),
+      bookmarkListing: jest.fn(),
     };
     const instance = new ArticleReadView(props);
     instance.state = { notFound: true };
@@ -44,28 +58,34 @@ describe('ArticleReadView', () => {
 
 
   it('should call setState after receiving props ', () => {
-    const instance = new ArticleReadView();
-    instance.setState = jest.fn();
     const props = {
+      bookmarks: [{ title: 'jj', slug: 'slug-as12' }],
+      bookmarkState: {
+        successMessage: '',
+        errorMessage: '',
+      },
       article: {
         title: 'test title',
+        author: 'hello',
+      },
+      authState: {
+        IsAuth: true,
+      },
+      bookmarkListing: jest.fn(),
+      setState: jest.fn(),
+      getSingleArticle: jest.fn(),
+      componentWillReceiveProps: jest.fn(),
+      match: {
+        params: {
+          slug: 'slug-as12',
+        },
       },
 
     };
-    instance.componentWillReceiveProps(props);
-    expect(instance.setState).toHaveBeenCalled();
-  });
-
-  it('should call setState after receiving props without article ', () => {
-    const instance = new ArticleReadView();
-    instance.setState = jest.fn();
-    const props = {
-      articleReducer: {
-        article: null,
-      },
-    };
-    instance.componentWillReceiveProps(props);
-    expect(instance.setState).toHaveBeenCalled();
+    const instance = shallow(<ArticleReadView {...props} />);
+    instance.instance().setState = jest.fn();
+    instance.instance().componentWillReceiveProps(props);
+    expect(instance.instance().setState).toHaveBeenCalled();
   });
 
   it('should call getSingleArticle after will mount ', () => {
@@ -81,22 +101,92 @@ describe('ArticleReadView', () => {
         },
       },
       getSingleArticle: jest.fn(),
+      bookmarkListing: jest.fn(),
     };
     const instance = new ArticleReadView(props);
     instance.componentWillMount();
     expect(instance.props.getSingleArticle).toHaveBeenCalled();
   });
+  it('should call onBookmark ', () => {
+    const props = {
+      articleReducer: {
+        article: {
+          title: 'test title',
+        },
+      },
+      match: {
+        params: {
+          slug: 'slug-as12',
+        },
+      },
+      authState: {
+        IsAuth: true,
+      },
+      getSingleArticle: jest.fn(),
+      bookmarkListing: jest.fn(),
+      bookmarkArticle: jest.fn(),
+    };
+    toast.error = jest.fn();
+    const instance = new ArticleReadView(props);
+    instance.onBookmark({ preventDefault() {} });
+    expect(instance.props.bookmarkArticle).toHaveBeenCalled();
+  });
+  it('should call handle flag ', () => {
+    const props = {
+      articleReducer: {
+        article: {
+          title: 'test title',
+        },
+      },
+      match: {
+        params: {
+          slug: 'slug-as12',
+        },
+      },
+      getSingleArticle: jest.fn(),
+      bookmarkListing: jest.fn(),
+    };
+    toast.error = jest.fn();
+    const instance = new ArticleReadView(props);
+    instance.handleFlag();
+    expect(toast.error).toHaveBeenCalled();
+  });
 
+  it('should call handle flag without token', () => {
+    const props = {
+      articleReducer: {
+        article: {
+          title: 'test title',
+        },
+      },
+      match: {
+        params: {
+          slug: 'slug-as12',
+        },
+      },
+      getSingleArticle: jest.fn(),
+      bookmarkListing: jest.fn(),
+    };
+    localStorage.setItem('token', '123');
+    window.location.assign = jest.fn();
+    const instance = new ArticleReadView(props);
+    instance.handleFlag();
+    expect(window.location.assign).toHaveBeenCalled();
+  });
   it('should map state to props', () => {
     const state = {
       articleReducer: {
         article: {},
         loading: true,
       },
+      bookmarkListReducer: {
+        bookmarks: [{ title: 'ded', slug: 'dededd' }],
+      },
     };
     expect(mapStateToProps(state)).toEqual({
       article: {},
       loading: true,
+      bookmarks: [{ title: 'ded', slug: 'dededd' }],
     });
   });
 
@@ -130,10 +220,15 @@ describe('ArticleReadView', () => {
         article: {},
         loading: true,
       },
+      bookmarkListReducer: {
+        bookmarks: [],
+        isBookmarked: undefined,
+      },
     };
     expect(mapStateToProps(state)).toEqual({
       article: {},
       loading: true,
+      bookmarks: [],
     });
   });
 });
