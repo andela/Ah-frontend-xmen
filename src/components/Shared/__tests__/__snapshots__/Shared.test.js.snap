@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shared Components should render Footer without crushing 1`] = `ShallowWrapper {}`;
+
+exports[`Shared Components should render Header without crushing 1`] = `ShallowWrapper {}`;

@@ -1,17 +1,183 @@
-
 @import 'variables.scss';
-h1{
-    color:$colour;
-  }
-  h3{
-      color: $orange;
-  }
-input{
-    background-color : $cyan;
-    color:$blue;
 
+html, body{
+    margin: 0;
+    padding: 0;
 }
 
-div{
-    background-color: $teal;
+a{
+    text-decoration: none;
+    color: $primary-color;
+    transition-duration: 0.5s;
+}
+
+a:hover{
+    color: #1d1d1d;
+}
+
+.container{
+    padding: 0;
+}
+
+h4{
+    color: #1d1d1d !important;
+    font-family: 'Patua One', cursive !important;
+    font-weight: bold;
+}
+
+.hr
+{
+    margin: 0;
+}
+
+#top-line{
+    margin-bottom: 10px;
+}
+
+.title{
+    text-align: left;
+    float: left;
+}
+
+.introduction h1{
+    color: $white;
+    font-size: 40px;
+}
+
+.h3{
+    font-weight: bolder;
+}
+
+.introduction p{
+    margin: 20px 0;
+    color: $white;
+    font-size: 20px;
+}
+
+.navbar{
+    height: 77px;
+}
+
+.navbar-name{
+    color: $primary-color;
+    margin: 20px 0;
+    font-weight: 500px;
+}
+
+.card-board
+{
+    padding: 0;
+    text-align: left;
+    flex: 1 1 auto;
+}
+
+.img-profile{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+.bottom-bar{
+    padding: 10px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.description{
+    text-align: left;
+    font-size: 16px !important;
+}
+
+/* --- all buttons css --- */
+
+.rounded-circle
+{
+    border-radius: 25px !important;
+}
+
+.login-nav{
+    float: right;
+}
+
+.button-primary{
+    color: $white;
+    background: $primary-color;
+}
+
+/* --- searchbox --- */
+
+.search{
+    width: 300px !important;
+    border: 1px solid $primary-color !important;
+    background-color: transparent !important;
+}
+
+/* homepage */
+
+.section{
+    width: 100%;
+    background-image: url(/src/assets/images/books-knowledge.jpg);
+    background-repeat: no-repeat;
+    height: 550px;
+    background-size: cover;
+}
+
+.welcome{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.about{
+    font-size: 13px !important;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.bar{
+    width: 100%;
+}
+
+.introduction{
+    width: 50%;
+    margin-top: 30px;
+    margin: 0 auto;
+    float: left;
+    text-align: left;
+}
+
+.article-header{
+    float: left;
+}
+
+.footer{
+    clear: both;
+    text-align: center;
+}
+
+@media (min-width: 320px) and (max-width: 480px)
+{
+    .introduction
+    {
+        width: 100%;
+    }
+    h4{
+        float: none;
+        width: 100%;
+    }
+    .article-header{
+        float: none;
+        width: 100%;
+    }
+    .search{
+        width: 100%;
+        float: none;
+    }
 }

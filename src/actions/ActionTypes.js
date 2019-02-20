@@ -1,0 +1,6 @@
+const ActionTypes = {
+  FETCH_ARTICLES_FAILED: 'FETCH_ARTICLES_FAILED',
+  FETCH_ARTICLES_SUCCESS: 'FETCH_ARTICLES_SUCCESS',
+};
+
+export default ActionTypes;

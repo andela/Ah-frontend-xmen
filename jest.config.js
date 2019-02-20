@@ -1,3 +1,5 @@
+require('./webpack.config');
+require('dotenv').config();
 
 module.exports = {
   // Automatically clear mock calls and instances between every test
@@ -19,7 +21,7 @@ module.exports = {
 
   // The paths to modules that run some code to configure
   //  or set up the testing environment before each test
-  setupFiles: ['<rootDir>/enzyme.config.js'],
+  setupFiles: ['<rootDir>/enzyme.config.js', '<rootDir>/webpack.config.js'],
 
   // The test environment that will be used for testing
   testEnvironment: 'jsdom',
