@@ -19,7 +19,7 @@ export class ArticleCard extends React.Component {
                   alt=""
                   src={
                     !this.props.author.image
-                      ? '/src/assets/images/avatar.png'
+                      ? 'https://res.cloudinary.com/soultech/image/upload/v1550685426/authors%20haven%20pics/avatar.png'
                       : this.props.author.image
                   }
                   className="img-profile"
