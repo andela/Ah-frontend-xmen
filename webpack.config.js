@@ -7,6 +7,7 @@ module.exports = {
   entry: ['./src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
   resolve: {
@@ -63,7 +64,9 @@ module.exports = {
     new Dotenv(),
   ],
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
 
 };
