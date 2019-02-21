@@ -2,6 +2,7 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+
 module.exports = {
   entry: ['./src/index.js'],
   output: {
@@ -59,8 +60,10 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
+    new Dotenv(),
   ],
   devServer: {
     historyApiFallback: true,
   },
+
 };

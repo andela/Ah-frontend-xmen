@@ -1,0 +1,14 @@
+.google-btn{
+    background:#f5365c !important;
+    color: white !important;
+    display: inline-block !important;
+    border-radius: 60px !important; 
+    padding: 1.3em 0.6em !important;
+}
+
+.facebook-btn{
+    color: white !important;
+    display: inline-block !important;
+    border-radius: 60px !important; 
+    padding: 1.3em 1.8em !important;   
+}
