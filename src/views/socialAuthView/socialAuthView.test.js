@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { SocialAuthView, mapStateToProps } from './socialAuthView';
 
-const push = jest.fn();
 const props = {
   googleSignInAction: jest.fn(),
   facebookSignInAction: jest.fn(),
@@ -21,7 +20,7 @@ const props = {
     payload: '',
     token: '',
   },
-  history: { push },
+
 };
 
 const initialState = {
