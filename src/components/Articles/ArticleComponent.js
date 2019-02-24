@@ -61,7 +61,7 @@ const ArticleComponent = (props) => {
         <div className="">
           <h1 className="display-2">{props.article.title}</h1>
         </div>
-        <Link to={`/profile/${props.article.author.username}`}>
+        <Link to={`/profiles/${props.article.author.username}`}>
           <div className="">
             <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.article.author.image)} alt="author avatar" />
             <p className="text-muted align-middle">

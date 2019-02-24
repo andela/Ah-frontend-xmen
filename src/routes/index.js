@@ -10,6 +10,8 @@ import ReportArticleView from '../views/ReportArticleView';
 import ArticleReadView from '../views/ArticleReadView';
 import EditArticleView from '../views/articleEditorView/EditArticleView';
 import CreateArticleView from '../views/articleEditorView/CreateArticleView';
+import ProfileListView from '../views/ProfileListView';
+
 
 const Routes = () => (
   <Router>
@@ -25,8 +27,10 @@ const Routes = () => (
       <Route path="/article/:slug/report" exact strict component={ReportArticleView} />
       <Route path="/editor" exact strict component={CreateArticleView} />
       <Route path="/editor/:slug" exact strict component={EditArticleView} />
+      <Route path="/profiles/:username/following" exact strict component={ProfileListView} />
+      <Route path="/profiles/:username/followers" exact strict component={ProfileListView} />
+      <Route path="/who_to_follow" exact strict component={ProfileListView} />
       <Footer />
-
     </div>
   </Router>
 );
