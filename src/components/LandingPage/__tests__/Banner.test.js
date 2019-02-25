@@ -13,8 +13,23 @@ describe('Banner', () => {
     const wrapper = shallow(<Banner />);
     expect(wrapper.find('#modalLauncher').simulate('click', { preventDefault: () => {} }).length).toBe(1);
   });
+
   it('should call onModalClose', () => {
     const wrapper = shallow(<Banner />);
     expect(wrapper.instance().onModalClose({ preventDefault() {} })).toEqual(<Redirect push={false} to="/" />);
+  });
+
+  it('should call setState onOpenLoginModal', () => {
+    const instance = new Banner();
+    instance.setState = jest.fn();
+    instance.onOpenLoginModal({});
+    expect(instance.setState).toHaveBeenCalled();
+  });
+
+  it('should call setState onCloseLoginModal', () => {
+    const instance = new Banner();
+    instance.setState = jest.fn();
+    instance.onCloseLoginModal({});
+    expect(instance.setState).toHaveBeenCalled();
   });
 });

@@ -12,10 +12,10 @@
     "test:coverage": " jest --collectCoverage",
     "start": "webpack-dev-server --open --mode development --hot --https",
     "build": "webpack --mode production --open --hot",
+    "lint": "eslint . --ignore-path .gitignore",
+    "lint:fix": "eslint . --ignore-path .gitignore --fix",
     "heroku-prebuild": "yarn install ",
-    "heroku-postbuild": "yarn run build",
-    "lint": "eslint  . --ignore-path .gitignore",
-    "lint:fix": "eslint . --fix --ignore-path .gitignore"
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",

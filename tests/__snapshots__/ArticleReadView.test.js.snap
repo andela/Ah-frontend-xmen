@@ -16,22 +16,4 @@ exports[`ArticleReadView should render 404 view without crashing 1`] = `
 </div>
 `;
 
-exports[`ArticleReadView should render without crashing 1`] = `
-<div>
-  <ArticleComponent
-    author={
-      Object {
-        "useraname": "",
-      }
-    }
-    share_links={
-      Object {
-        "fbshare": "https://www.facebook.com/sharer/sharer.php?u=https://ah-frontend-xmen.herokuapp.com/articles/slug-as12",
-        "gpshare": "https://plus.google.com/share?url=https://ah-frontend-xmen.herokuapp.com/articles/slug-as12",
-        "mailshare": "mailto:?Subject=undefined&body=This is an interesting article, undefined https://ah-frontend-xmen.herokuapp.com/articles/slug-as12",
-        "twshare": "https://twitter.com/home?status=This%20is%20an%20interesting%20article,%20undefined%20https://ah-frontend-xmen.herokuapp.com/articles/slug-as12",
-      }
-    }
-  />
-</div>
-`;
+exports[`ArticleReadView should render without crashing 1`] = `ShallowWrapper {}`;

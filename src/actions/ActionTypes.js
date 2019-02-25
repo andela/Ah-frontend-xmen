@@ -55,3 +55,6 @@ export const getProfileBegin = () => ({
 export const editProfileBegin = () => ({
   type: EDIT_PROFILE_BEGIN,
 });
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';

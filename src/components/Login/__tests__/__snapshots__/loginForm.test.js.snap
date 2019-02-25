@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login form on login fail should render without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`login form on login success should render without crashing 1`] = `ShallowWrapper {}`;

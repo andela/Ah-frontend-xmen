@@ -1,4 +1,7 @@
+import React from 'react';
+import { shallow } from 'enzyme';
 import { ArticleReadView, mapStateToProps } from '../src/views/ArticleReadView';
+
 
 describe('ArticleReadView', () => {
   it('should render without crashing', () => {
@@ -15,8 +18,8 @@ describe('ArticleReadView', () => {
       },
       getSingleArticle: jest.fn(),
     };
-    const instance = new ArticleReadView(props);
-    expect(instance.render()).toMatchSnapshot();
+    const instance = shallow(<ArticleReadView {...props} />);
+    expect(instance).toMatchSnapshot();
   });
 
   it('should render 404 view without crashing', () => {
@@ -24,6 +27,7 @@ describe('ArticleReadView', () => {
     instance.state = { notFound: true };
     expect(instance.render()).toMatchSnapshot();
   });
+
 
   it('should call setState after receiving props ', () => {
     const instance = new ArticleReadView();
