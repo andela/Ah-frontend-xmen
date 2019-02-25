@@ -9,4 +9,4 @@ const fetchArticlesAction = () => dispatch => fetch(`${BASE_URL}/articles/?limit
     payload: data.articles.results,
   }));
 
-export default fetchArticlesAction;
+export default { fetchArticlesAction };
