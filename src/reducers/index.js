@@ -8,6 +8,7 @@ import profileReducer from './profileReducer';
 import articleReducer from './articleReducer';
 import commentReducer from './commentReducer/commentReducer';
 import authReducer from './authReducer';
+import likeArticleReducer from './LikeArticleReducer';
 
 export default combineReducers({
   articles: fetchArticlesReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   loginReducer,
   comments: commentReducer,
   Auth: authReducer,
+  likeArticleReducer,
 });
