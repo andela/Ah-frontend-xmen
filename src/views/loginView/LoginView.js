@@ -9,7 +9,11 @@ import SocialAuthView from '../socialAuthView/socialAuthView';
 export class LoginView extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.token) {
+      // const jwt = require('jsonwebtoken')
       localStorage.setItem('token', nextProps.token);
+      // const decoded = jwt.decode(localStorage.getItem('token'));
+      // const user = decoded.user_data.split(' ')[1];
+      // localStorage.setItem('username', user);
       setTimeout(() => window.location.reload('/'), 500);
     }
   }

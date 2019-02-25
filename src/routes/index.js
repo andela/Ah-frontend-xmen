@@ -6,6 +6,7 @@ import Footer from '../components/Shared/Footer';
 import PasswordResetView from '../views/PasswordResetView';
 import ProfileView from '../views/ProfileView';
 import UpdateView from '../views/UpdateView';
+import ReportArticleView from '../views/ReportArticleView';
 
 import ArticleReadView from '../views/ArticleReadView';
 
@@ -19,6 +20,7 @@ const Routes = () => (
       <Route path="/profile" exact strict component={ProfileView} />
       <Route path="/profile/edit" exact strict component={UpdateView} />
       <Route path="/article/:slug" exact strict component={ArticleReadView} />
+      <Route path="/article/report/:slug" exact strict component={ReportArticleView} />
       <Footer />
 
     </div>
