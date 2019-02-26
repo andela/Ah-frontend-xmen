@@ -8,6 +8,7 @@ describe('profile view', () => {
     const props = {
       getProfiles: jest.fn(),
       loading: 'loading',
+      match: { params: {} },
     }; const wrapper = shallow(<ProfileView {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -15,12 +16,14 @@ describe('profile view', () => {
     const props = {
       getProfiles: jest.fn(),
       error: 'error',
+      match: { params: {} },
     }; const wrapper = shallow(<ProfileView {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render without crashing', () => {
     const props = {
       getProfiles: jest.fn(),
+      match: { params: {} },
     }; const wrapper = shallow(<ProfileView {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

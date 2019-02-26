@@ -12,7 +12,7 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getProfiles();
+    this.props.getProfiles(this.props.match.params.username);
   }
 
   render() {
@@ -31,9 +31,12 @@ export class ProfileView extends React.Component {
     if (this.props.loading) {
       return <div className="loadingmsg card">Loading...</div>;
     }
+    const ownUsername = localStorage.getItem('username');
+    const paramUsername = this.props.match.params.username || ownUsername;
+    const isOwnProfile = ownUsername === paramUsername;
     return (
       <div>
-        <Profile profile={this.props.profile} />
+        <Profile profile={this.props.profile} isOwnProfile={isOwnProfile} />
       </div>
     );
   }
@@ -48,8 +51,8 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  getProfiles: () => {
-    dispatch(fetchProfile());
+  getProfiles: (username) => {
+    dispatch(fetchProfile(username));
   },
 });
 

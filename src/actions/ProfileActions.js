@@ -2,7 +2,6 @@ import * as actions from './ActionTypes';
 import { BASE_URL } from '../constants';
 
 
-const username = localStorage.getItem('username');
 const token = localStorage.getItem('token');
 
 export function handleErrors(response) {
@@ -12,7 +11,10 @@ export function handleErrors(response) {
   return response;
 }
 
-export default function fetchProfile() {
+export default function fetchProfile(username) {
+  if (username === undefined) {
+    username = localStorage.getItem('username');
+  }
   return (dispatch) => {
     dispatch(actions.getProfileBegin());
     return fetch(`${BASE_URL}/profiles/${username}`,

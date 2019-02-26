@@ -19,7 +19,7 @@ function parseName(author) {
 }
 
 function parseAvatar(image) {
-  if (image === null) return '/src/assets/images/avatar.png';
+  if (image === null) return 'https://res.cloudinary.com/soultech/image/upload/v1550685426/authors%20haven%20pics/avatar.png';
   return image;
 }
 
@@ -35,7 +35,7 @@ const ArticleComponent = props => (
       <div className="">
         <h1 className="display-2">{props.title}</h1>
       </div>
-      <Link to={`/profile/${props.author.username}`}>
+      <Link to={`/profiles/${props.author.username}`}>
         <div className="">
           <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.author.image)} alt="author avatar" />
           <p className="text-muted align-middle">

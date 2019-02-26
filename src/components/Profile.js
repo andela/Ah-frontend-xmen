@@ -53,7 +53,7 @@ Following:
           <p className="mt-4">
             {bio}
           </p>
-          <button type="button" className="btn button-primary" onClick={editOwnProfile}>Edit Profile</button>
+          <button type="button" className="btn button-primary" onClick={editOwnProfile} hidden={!props.isOwnProfile}>Edit Profile</button>
         </div>
       </div>
     </div>
