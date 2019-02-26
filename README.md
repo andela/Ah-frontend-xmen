@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/andela/Ah-frontend-xmen/tree/develop.svg?style=svg)](https://circleci.com/gh/andela/Ah-frontend-xmen/tree/develop)
+[![Build Status](https://travis-ci.com/andela/Ah-frontend-xmen.svg?branch=develop)](https://travis-ci.com/andela/Ah-frontend-xmen)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f8b36ef120b6a57eb2a0/test_coverage)](https://codeclimate.com/github/andela/Ah-frontend-xmen/test_coverage)
 
 # Authors Haven UI
