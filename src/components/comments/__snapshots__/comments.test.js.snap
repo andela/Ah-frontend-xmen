@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentBanner/> should render without crushing 1`] = `ShallowWrapper {}`;
+
+exports[`<CommentInput/> should render with out crushing 1`] = `ShallowWrapper {}`;

@@ -5,6 +5,7 @@ describe('articleReducer', () => {
   it('should return correct state for ARTICLE_FETCH_SUCCESSFUL action', () => {
     const expectedState = {
       article: {},
+      loading: false,
     };
     const action = {
       type: ARTICLE_FETCH_SUCCESSFUL,
@@ -16,7 +17,7 @@ describe('articleReducer', () => {
 
   it('should return correct state for ARTICLE_FETCH_NOT_FOUND action', () => {
     const expectedState = {
-      article: null,
+      loading: false,
     };
     const action = {
       type: ARTICLE_FETCH_NOT_FOUND,
