@@ -5,6 +5,7 @@ import Parser from 'html-react-parser';
 import LikeButtonView from '../../views/Buttons/LikeButtonView';
 import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
 
+const slug = localStorage.getItem('slug');
 function parseDate(dateString) {
   const date = new Date(dateString);
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -26,6 +27,7 @@ function parseImage(image) {
   if (image !== null) return (<img className="img-respoonsive w-100 mb-5" src={image} alt="article" />);
   return undefined;
 }
+
 
 const ArticleComponent = props => (
   <div className="container p-5">
@@ -72,7 +74,9 @@ const ArticleComponent = props => (
           <a rel="noopener noreferrer" target="_blank" href={props.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
           <a rel="noopener noreferrer" target="_blank" href={props.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
           <a rel="noopener noreferrer" target="_blank" href={props.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
-          <a rel="noopener noreferrer" target="_blank" href={`/article/report/${props.title}`}><span className="m-2"><i className="fas fa-flag" id="report" /></span></a>
+          <span className="m-2">
+            <i className="fas fa-flag" id="report" onClick={props.onClick} />
+          </span>
         </div>
       </div>
     </div>

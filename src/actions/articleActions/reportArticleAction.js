@@ -2,7 +2,7 @@ import * as actions from '../ActionTypes';
 import { handleErrors } from '../ProfileActions';
 import { BASE_URL } from '../../constants';
 
-function reportArticleAction(reason) {
+function reportArticleAction(payload) {
   const token = localStorage.getItem('token');
   const slug = localStorage.getItem('slug');
   return (dispatch) => {
@@ -10,7 +10,7 @@ function reportArticleAction(reason) {
     return fetch(`${BASE_URL}/articles/${slug}/report`, {
       method: 'POST',
       mode: 'cors',
-      body: JSON.stringify(reason),
+      body: JSON.stringify(payload),
       headers: {
         'content-type': 'application/json',
         authorization: `Bearer ${token}`,
@@ -19,7 +19,9 @@ function reportArticleAction(reason) {
       .then(handleErrors)
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
+        if (data) {
+          dispatch(actions.reportArticleSuccess);
+        }
       })
       .catch(error => dispatch(actions.reportArticleFails(error)));
   };

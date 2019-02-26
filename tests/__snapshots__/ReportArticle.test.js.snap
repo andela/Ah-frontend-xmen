@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Report Article /> tests the report Article component matches the snapshot 1`] = `ShallowWrapper {}`;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import ArticlComponent from '../components/Articles/ArticleComponent';
 import getSingleArticle from '../actions/articleActions/getSingleArticle';
 import CommentView from './commentView/commentView';
@@ -28,6 +28,7 @@ export class ArticleReadView extends React.Component {
       loading: true,
 
     };
+    this.handleFlag = this.handleFlag.bind(this);
   }
 
 
@@ -35,12 +36,24 @@ export class ArticleReadView extends React.Component {
     const { props } = this;
     const { slug } = props.match.params;
     props.getSingleArticle(slug);
+    localStorage.setItem('slug', slug);
   }
 
   componentWillReceiveProps(props) {
     this.setState({
       loading: false,
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleFlag() {
+    const token = localStorage.getItem('token');
+    const slug = localStorage.getItem('slug');
+    if (!token) {
+      toast.error('Please Log in');
+    } else {
+      window.location.assign(`/article/${slug}/report`);
+    }
   }
 
   render() {
@@ -68,6 +81,7 @@ export class ArticleReadView extends React.Component {
         <ArticlComponent
           slug={this.props.match.params.slug}
           {...article}
+          onClick={this.handleFlag}
         />
         <CommentView />
         <ToastContainer />

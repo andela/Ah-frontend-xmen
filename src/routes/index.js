@@ -20,7 +20,7 @@ const Routes = () => (
       <Route path="/profile" exact strict component={ProfileView} />
       <Route path="/profile/edit" exact strict component={UpdateView} />
       <Route path="/article/:slug" exact strict component={ArticleReadView} />
-      <Route path="/article/report/:slug" exact strict component={ReportArticleView} />
+      <Route path="/article/:slug/report" exact strict component={ReportArticleView} />
       <Footer />
 
     </div>

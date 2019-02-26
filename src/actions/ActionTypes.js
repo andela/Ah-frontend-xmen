@@ -86,6 +86,7 @@ export const reportArticleSuccess = payload => ({
   payload,
 });
 
-export const reportArticleFails = () => ({
+export const reportArticleFails = error => ({
   type: REPORT_ARTICLE_FAILS,
+  payload: { error },
 });
