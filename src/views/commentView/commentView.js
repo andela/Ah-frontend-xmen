@@ -14,8 +14,13 @@ export class CommentView extends Component {
 
     }
 
+    componentDidUpdate() {
+      this.props.getCommentsAction({
+        articleSlug: this.props.match.params.slug,
+      });
+    }
 
-    componentDidMount() {
+  componentDidMount() {
       this.props.getCommentsAction({
         articleSlug: this.props.match.params.slug,
       });
@@ -53,11 +58,6 @@ export class CommentView extends Component {
         payload: this.state,
         articleSlug: this.props.match.params.slug,
       });
-      setTimeout(() => {
-        this.props.getCommentsAction({
-          articleSlug: this.props.match.params.slug,
-        });
-      }, 1000);
     };
 
     handleChange=(e) => {
