@@ -12,6 +12,7 @@ import likeArticleReducer from './LikeArticleReducer';
 import reportReducer from './reportReducer';
 import articleEditorReducer from './articleEditorReducer';
 
+
 export default combineReducers({
   articles: fetchArticlesReducer,
   socialAuthReducer,

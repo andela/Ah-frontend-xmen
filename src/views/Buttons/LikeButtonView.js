@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
 import LikeButton from '../../components/Buttons/LikeButton';
 import likeDislikeArticleAction from '../../actions/articleActions/LikeDislikeArticleAction';
 import getLikeDislikeArticleStatus from '../../actions/articleActions/getLikeDislikeArticleStatus';
@@ -15,11 +14,6 @@ export class LikeButtonView extends React.Component {
     this.props.getLikeStatus(this.props.slug);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.likeState.errorMessage.like) {
-
-    }
-  }
 
     handleLike = () => {
       const { slug, isLikeBtn } = this.props;
