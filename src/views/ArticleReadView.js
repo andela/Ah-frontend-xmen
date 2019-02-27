@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ArticlComponent from '../components/Articles/ArticleComponent';
 import getSingleArticle from '../actions/articleActions/getSingleArticle';
+import CommentView from './commentView/commentView';
 
 
 function parseShareLinks(article, slug) {
@@ -22,12 +23,8 @@ export class ArticleReadView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      article: {
-        author: {
-          useraname: '',
-        },
-      },
       notFound: false,
+      loading: true,
 
     };
   }
@@ -40,38 +37,39 @@ export class ArticleReadView extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (props.articleReducer.article === null) {
-      this.setState({
-        notFound: true,
-      });
-    } else {
-      this.setState({
-        article: props.articleReducer.article,
-      });
-    }
+    this.setState({
+      loading: false,
+    });
   }
 
   render() {
-    const { article, notFound } = this.state;
-    if (notFound) {
+    const { article } = this.props;
+    if (this.state.loading) {
       return (
         <div className="h-100 w-100 p-5 m-5  text-center">
-          <span style={{ fontSize: '800%' }}>404</span>
+          <span style={{ fontSize: '400%' }}>Loading.....</span>
         </div>
       );
     }
-    if (article)article.share_links = parseShareLinks(article, this.props.match.params.slug);
+    if (article.title === '') {
+      return (
+        <div className="h-100 w-100 p-5 m-5  text-center">
+          <span style={{ fontSize: '400%' }}>404</span>
+        </div>
+      );
+    }
+    article.share_links = parseShareLinks(article, this.props.match.params.slug);
     return (
       <div>
         <ArticlComponent {...article} />
+        <CommentView />
       </div>
     );
   }
 }
 
-export const mapStateToProps = state => (
-  {
-    ...state,
-  }
-);
+export const mapStateToProps = state => ({
+  article: state.articleReducer.article,
+  loading: state.articleReducer.loading,
+});
 export default connect(mapStateToProps, { getSingleArticle })(ArticleReadView);
