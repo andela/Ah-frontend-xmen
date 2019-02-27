@@ -6,11 +6,10 @@ import { ArticleReadView, mapStateToProps } from '../src/views/ArticleReadView';
 describe('ArticleReadView', () => {
   it('should render without crashing', () => {
     const props = {
-      articleReducer: {
-        article: {
-          title: 'test title',
-        },
+      article: {
+        title: 'test title',
       },
+      loading: false,
       match: {
         params: {
           slug: 'slug-as12',
@@ -19,11 +18,26 @@ describe('ArticleReadView', () => {
       getSingleArticle: jest.fn(),
     };
     const instance = shallow(<ArticleReadView {...props} />);
+    instance.setProps({
+      loading: false,
+    });
     expect(instance).toMatchSnapshot();
   });
 
   it('should render 404 view without crashing', () => {
-    const instance = new ArticleReadView();
+    const props = {
+      article: {
+        title: '',
+      },
+      loading: true,
+      match: {
+        params: {
+          slug: 'slug-as12',
+        },
+      },
+      getSingleArticle: jest.fn(),
+    };
+    const instance = new ArticleReadView(props);
     instance.state = { notFound: true };
     expect(instance.render()).toMatchSnapshot();
   });
@@ -33,11 +47,10 @@ describe('ArticleReadView', () => {
     const instance = new ArticleReadView();
     instance.setState = jest.fn();
     const props = {
-      articleReducer: {
-        article: {
-          title: 'test title',
-        },
+      article: {
+        title: 'test title',
       },
+
     };
     instance.componentWillReceiveProps(props);
     expect(instance.setState).toHaveBeenCalled();
@@ -75,6 +88,15 @@ describe('ArticleReadView', () => {
   });
 
   it('should map state to props', () => {
-    expect(mapStateToProps({})).toEqual({});
+    const state = {
+      articleReducer: {
+        article: {},
+        loading: true,
+      },
+    };
+    expect(mapStateToProps(state)).toEqual({
+      article: {},
+      loading: true,
+    });
   });
 });
