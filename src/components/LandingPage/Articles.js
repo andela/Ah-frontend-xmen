@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ArticleCard } from './ArticleCard';
-import fetchArticlesAction from '../../actions/articleActions/fetchArticlesAction';
+import { fetchArticlesAction } from '../../actions/articleActions/fetchArticlesAction';
+import Paginations from '../../views/Paginations';
 
 export class Articles extends Component {
-  componentWillMount = () => {
-    this.props.fetchArticlesAction();
+  constructor(props) {
+    super(props);
+    this.state = {
+      articles: [],
+    };
   }
 
+  componentWillMount = () => {
+    this.props.fetchArticlesAction();
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ articles: nextProps.articles });
+    console.log('$$$$$$$$$$$$$$', nextProps);
+  }
+
+  updateArticles = (newArticles) => {
+    this.setState({ articles: newArticles });
+  };
+
   render() {
-    const { articles } = this.props;
+    const { articles } = this.state;
     const articleItems = articles.map((article, index) => {
       if (!article.image) {
         article.image = `http://loremflickr.com/700/430?random=${index}`;
       }
-      return (
-        <ArticleCard key={article.slug} {...article} />
-      );
+      return <ArticleCard key={article.slug} {...article} />;
     });
 
     return (
@@ -42,6 +57,7 @@ export class Articles extends Component {
                 </div>
                 <hr className="hr mb-5 mt-5" />
                 <div className="row row-grid">{articleItems}</div>
+                <Paginations updated={this.updateArticles} />
               </div>
             </div>
           </div>

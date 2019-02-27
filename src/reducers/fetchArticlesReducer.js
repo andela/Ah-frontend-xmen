@@ -2,6 +2,8 @@ import ActionTypes from '../actions/ActionTypes';
 
 const initialState = {
   articles: [],
+  currentPage: 1,
+  allArticles: 1,
 };
 
 const fetchArticles = (state = initialState, action) => {
@@ -9,7 +11,14 @@ const fetchArticles = (state = initialState, action) => {
     case ActionTypes.FETCH_ARTICLES_SUCCESS:
       return {
         ...state,
-        articles: action.payload,
+        articles: action.payload.results,
+        allArticles: action.payload.count,
+      };
+    case ActionTypes.GET_ALL_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload.results,
+        allArticles: action.payload.count,
       };
     default:
       return state;
