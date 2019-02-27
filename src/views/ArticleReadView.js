@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ArticlComponent from '../components/Articles/ArticleComponent';
 import getSingleArticle from '../actions/articleActions/getSingleArticle';
-import CommentView from './commentView/commentView';
 
 
 function parseShareLinks(article, slug) {
@@ -23,8 +22,12 @@ export class ArticleReadView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      article: {
+        author: {
+          useraname: '',
+        },
+      },
       notFound: false,
-      loading: true,
 
     };
   }
@@ -37,39 +40,38 @@ export class ArticleReadView extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({
-      loading: false,
-    });
+    if (props.articleReducer.article === null) {
+      this.setState({
+        notFound: true,
+      });
+    } else {
+      this.setState({
+        article: props.articleReducer.article,
+      });
+    }
   }
 
   render() {
-    const { article } = this.props;
-    if (this.state.loading) {
+    const { article, notFound } = this.state;
+    if (notFound) {
       return (
         <div className="h-100 w-100 p-5 m-5  text-center">
-          <span style={{ fontSize: '400%' }}>Loading.....</span>
+          <span style={{ fontSize: '800%' }}>404</span>
         </div>
       );
     }
-    if (article.title === '') {
-      return (
-        <div className="h-100 w-100 p-5 m-5  text-center">
-          <span style={{ fontSize: '400%' }}>404</span>
-        </div>
-      );
-    }
-    article.share_links = parseShareLinks(article, this.props.match.params.slug);
+    if (article)article.share_links = parseShareLinks(article, this.props.match.params.slug);
     return (
       <div>
         <ArticlComponent {...article} />
-        <CommentView />
       </div>
     );
   }
 }
 
-export const mapStateToProps = state => ({
-  article: state.articleReducer.article,
-  loading: state.articleReducer.loading,
-});
+export const mapStateToProps = state => (
+  {
+    ...state,
+  }
+);
 export default connect(mapStateToProps, { getSingleArticle })(ArticleReadView);
