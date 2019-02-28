@@ -47,7 +47,9 @@ const ArticleComponent = (props) => {
     starRatings = (
       <span className=" text-muted">
         {' '}
-        {props.average_rating}     <i className="fa fa-star" style={{ color: '#FFD700' }} aria-hidden="true" />
+        {props.average_rating}
+        {' '}
+        <i className="fa fa-star" style={{ color: '#FFD700' }} aria-hidden="true" />
       </span>
     );
   }

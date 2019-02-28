@@ -100,6 +100,8 @@ h4{
 .description{
     text-align: left;
     font-size: 16px !important;
+    color: #7e7e7e;
+    font-weight: 400 !important;
 }
 
 /* --- all buttons css --- */
@@ -176,7 +178,7 @@ h4{
     list-style: none;
     display: inline-block;
     padding: 0;
-    // margin-top: 10px;
+    margin-top: 10px;
   }
   .pagination li {
     display: inline;
@@ -196,6 +198,9 @@ h4{
   .pagination a.active {
     cursor: default;
   }
+  .pagination a:hover {
+    cursor: pointer;
+  }
   .pagination a:active {
     outline: none;
   }
@@ -211,14 +216,16 @@ h4{
     border-radius: 100%;
   }
   .modal-3 a:hover {
-    background-color: $primary-color;
-    color: $white;
+    background-color: $primary-color !important;
+    color: $white !important;
   }
   .modal-3 a.active, .modal-3 a:active {
-    background-color: $primary-color;
-    color: $white;
+    background-color: $primary-color !important;
+    color: $white !important;
+    outline: none;
   }
 
+/* responsiveness */
 @media (min-width: 320px) and (max-width: 480px)
 {
     .introduction

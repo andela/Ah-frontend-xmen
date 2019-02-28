@@ -14,12 +14,6 @@ const fetchArticles = (state = initialState, action) => {
         articles: action.payload.results,
         allArticles: action.payload.count,
       };
-    case ActionTypes.GET_ALL_ARTICLES_SUCCESS:
-      return {
-        ...state,
-        articles: action.payload.results,
-        allArticles: action.payload.count,
-      };
     default:
       return state;
   }
