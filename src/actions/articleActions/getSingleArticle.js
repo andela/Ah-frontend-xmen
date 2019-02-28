@@ -17,6 +17,7 @@ const getSingleArticle = slug => (dispatch) => {
           payload: null,
         });
       } else {
+        localStorage.setItem('article', JSON.stringify(data.articles));
         dispatch({
           type: ARTICLE_FETCH_SUCCESSFUL,
           payload: data.articles,

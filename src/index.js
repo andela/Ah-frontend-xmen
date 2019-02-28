@@ -10,6 +10,9 @@ import '../node_modules/argon-design-system-free/assets/css/argon.css';
 import './assets/css/socialAuth.css';
 import './assets/css/comments.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './assets/css/react-tags.css';
+import 'react-quill/dist/quill.snow.css';
+
 
 ReactDOM.render(
   <Provider store={store}>
