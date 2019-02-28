@@ -9,6 +9,7 @@ import articleReducer from './articleReducer';
 import commentReducer from './commentReducer/commentReducer';
 import authReducer from './authReducer';
 import likeArticleReducer from './LikeArticleReducer';
+import reportReducer from './reportReducer';
 
 export default combineReducers({
   articles: fetchArticlesReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   comments: commentReducer,
   Auth: authReducer,
   likeArticleReducer,
+  reportReducer,
 });

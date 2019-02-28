@@ -40,7 +40,12 @@ html, body{
   font-weight: 400;
   color: #1d1d1d;
 }
-
+#report{
+  color: red;
+}
+#report:hover{
+  cursor: pointer;
+}
 @media (min-width: 768px) and (max-width: 1030px){
   .wrapper {
     width: 70%;

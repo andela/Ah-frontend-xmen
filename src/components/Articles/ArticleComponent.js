@@ -5,6 +5,7 @@ import Parser from 'html-react-parser';
 import LikeButtonView from '../../views/Buttons/LikeButtonView';
 import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
 
+const slug = localStorage.getItem('slug');
 function parseDate(dateString) {
   const date = new Date(dateString);
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -27,6 +28,7 @@ function parseImage(image) {
   return undefined;
 }
 
+
 const ArticleComponent = props => (
   <div className="container p-5">
     <div className="col-m-9 col-s-12 p-5">
@@ -34,7 +36,6 @@ const ArticleComponent = props => (
         <h1 className="display-2">{props.title}</h1>
       </div>
       <Link to={`/profile/${props.author.username}`}>
-
         <div className="">
           <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.author.image)} alt="author avatar" />
           <p className="text-muted align-middle">
@@ -73,6 +74,9 @@ const ArticleComponent = props => (
           <a rel="noopener noreferrer" target="_blank" href={props.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
           <a rel="noopener noreferrer" target="_blank" href={props.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
           <a rel="noopener noreferrer" target="_blank" href={props.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
+          <span className="m-2">
+            <i className="fas fa-flag" id="report" onClick={props.onClick} />
+          </span>
         </div>
       </div>
     </div>

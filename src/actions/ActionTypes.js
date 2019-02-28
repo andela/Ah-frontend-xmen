@@ -47,6 +47,8 @@ export const ARTICLE_UNDISLIKE_SUCCESSFUL = 'ARTICLE_UNDISLIKE_SUCCESSFUL';
 export const ARTICLE_UNDISLIKE_FAILURE = 'ARTICLE_UNDISLIKE_FAILURE';
 export const ARTICLE_FETCH_LIKES_SUCCESSFUL = 'ARTICLE_FETCH_LIKES_SUCCESSFUL';
 
+export const REPORT_ARTICLE_SUCCEEDS = 'REPORT_ARTICLE_SUCCEEDS';
+export const REPORT_ARTICLE_FAILS = 'REPORT_ARTICLE_FAILS';
 
 export const getProfileSucceeds = profile => ({
   type: GET_PROFILE_SUCCEEDS,
@@ -78,3 +80,13 @@ export const editProfileBegin = () => ({
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+
+export const reportArticleSuccess = payload => ({
+  type: REPORT_ARTICLE_SUCCEEDS,
+  payload,
+});
+
+export const reportArticleFails = error => ({
+  type: REPORT_ARTICLE_FAILS,
+  payload: { error },
+});

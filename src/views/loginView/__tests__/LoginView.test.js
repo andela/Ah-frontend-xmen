@@ -6,22 +6,22 @@ describe('LoginView', () => {
   it('should render without crashing', () => {
     const props = {};
     const instance = new LoginView(props);
-    const wrapper = shallow(
-      instance.render(),
-    );
+    const wrapper = shallow(instance.render());
     expect(wrapper).toMatchSnapshot();
   });
 
-
   it('should reload on new token', () => {
     const props = {
-      token: '',
+      loginAction: jest.fn(),
     };
     global.setTimeout = jest.fn();
-
     const wrapper = shallow(<LoginView {...props} />);
+
     wrapper.instance().componentWillReceiveProps({
       token: '123',
+      user: 'wwwww',
+      errors: '',
+      isSuccessful: true,
     });
     expect(global.setTimeout).toHaveBeenCalled();
   });
@@ -43,8 +43,7 @@ describe('LoginView', () => {
 
     const event = {
       preventDefault: jest.fn(),
-      target:
-      {
+      target: {
         elements: {
           email: {
             value: 'testemail@mail.com',
