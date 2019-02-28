@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Parser from 'html-react-parser';
+import LikeButtonView from '../../views/Buttons/LikeButtonView';
+import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
 
 function parseDate(dateString) {
   const date = new Date(dateString);
@@ -57,15 +59,12 @@ const ArticleComponent = props => (
       </div>
       <div>
         <div className="float-left">
-
-          <button type="button" id="like-btn" onClick={props.handleLike} className="btn btn-outline-default">
-            <span className="pr-1"><i className="fa fa-lg fa-thumbs-up" /></span>
-            {props.likes_count}
-          </button>
-          <button type="button" id="dislike-btn" className="btn btn-outline-default">
-            <span className="pr-1"><i className="fa fa-lg fa-thumbs-down" /></span>
-            {props.dislikes_count}
-          </button>
+          <LikeButtonView slug={props.slug} likesCount={props.likes_count} isLikeBtn />
+          <DislikeButtonView
+            slug={props.slug}
+            dislikesCount={props.dislikes_count}
+            isLikeBtn={false}
+          />
 
         </div>
         <div className="float-right">

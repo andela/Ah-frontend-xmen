@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import ArticlComponent from '../components/Articles/ArticleComponent';
 import getSingleArticle from '../actions/articleActions/getSingleArticle';
 import CommentView from './commentView/commentView';
@@ -51,6 +52,7 @@ export class ArticleReadView extends React.Component {
         </div>
       );
     }
+
     if (article.title === '') {
       return (
         <div className="h-100 w-100 p-5 m-5  text-center">
@@ -58,11 +60,17 @@ export class ArticleReadView extends React.Component {
         </div>
       );
     }
+
     article.share_links = parseShareLinks(article, this.props.match.params.slug);
+
     return (
       <div>
-        <ArticlComponent {...article} />
+        <ArticlComponent
+          slug={this.props.match.params.slug}
+          {...article}
+        />
         <CommentView />
+        <ToastContainer />
       </div>
     );
   }
