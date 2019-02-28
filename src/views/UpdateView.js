@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import editProfile from '../actions/EditProfileAction';
 import UpdateProfile from '../components/UpdateProfile';
 import getProfile from '../actions/ProfileActions';
+import authHoc from '../hoc/authHoc';
 
 export class UpdateView extends Component {
   constructor(props) {
@@ -24,7 +25,9 @@ export class UpdateView extends Component {
   }
 
   componentDidMount() {
-    this.props.getProfile();
+    if (localStorage.getItem('token')) {
+      this.props.getProfile();
+    }
   }
 
   componentDidUpdate() {
@@ -69,4 +72,4 @@ const mapStateToProps = state => ({
   error: state.profileReducer.error,
 });
 
-export default connect(mapStateToProps, { editProfile, getProfile })(UpdateView);
+export default authHoc(connect(mapStateToProps, { editProfile, getProfile })(UpdateView));

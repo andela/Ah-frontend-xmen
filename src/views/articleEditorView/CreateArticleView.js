@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import Editor from '../../components/Articles/ArticleEditor';
 import { CreateArticle } from '../../actions/articleActions/articleEditorActions';
+import authHoc from '../../hoc/authHoc';
 
 export class CreateArticleView extends Component {
   constructor() {
@@ -101,4 +102,4 @@ const mapStateToProps = state => ({
   article: state.articleEditorReducer.article,
 });
 
-export default connect(mapStateToProps, { CreateArticle })(CreateArticleView);
+export default authHoc(connect(mapStateToProps, { CreateArticle })(CreateArticleView));

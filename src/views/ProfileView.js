@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import fetchProfile from '../actions/ProfileActions';
 import Profile from '../components/Profile';
+import authHoc from '../hoc/authHoc';
 
 export class ProfileView extends React.Component {
   constructor(props, { match }) {
@@ -56,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
+export default authHoc(connect(mapStateToProps, mapDispatchToProps)(ProfileView));

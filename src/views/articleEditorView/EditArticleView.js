@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Editor from '../../components/Articles/ArticleEditor';
 import { EditArticle } from '../../actions/articleActions/articleEditorActions';
 import getSingleArticle from '../../actions/articleActions/getSingleArticle';
+import authHoc from '../../hoc/authHoc';
 
 export class EditArticleView extends Component {
   constructor() {
@@ -113,4 +114,4 @@ const mapStateToProps = state => ({
   isEditSuccessful: state.articleEditorReducer.isEditSuccessful,
 });
 
-export default connect(mapStateToProps, { getSingleArticle, EditArticle })(EditArticleView);
+export default authHoc(connect(mapStateToProps, { getSingleArticle, EditArticle })(EditArticleView));
