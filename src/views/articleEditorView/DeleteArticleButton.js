@@ -16,7 +16,7 @@ export class DeleteButton extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isArticleDeleted) {
-      setTimeout(() => this.props.history.push('/'), 100);
+      // setTimeout(() => this.props.history.push('/'), 100);
     }
   }
 

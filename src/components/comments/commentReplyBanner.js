@@ -1,11 +1,20 @@
 import React from 'react';
-
+import Collapsible from 'react-collapsible';
+import CommentInput from '../../components/comments/commentInput';
+import CommentsInput from '../../views/commentView/commentView';
 const commentReplyBanner = props => {
   const replies=props.replyList.map(reply=>{
-    console.log('commentBanner==========>',props.commentId)
-    if(props.commentId === 388){
+    if(props.commentId === reply.comment){
       return(
-        <p key={reply.id}>{reply.id}</p>
+        <div key={reply.id} className="shadow container p-5">
+          <p >{reply.id}</p>
+          <p>{reply.reply_body}</p>
+          <p>{reply.author.username}</p>
+          {props.user===reply.author.username ?
+            <button className="btn btn-danger" id={reply.id} onClick={props.deleteReply}>Remove</button>
+            : null}
+        </div>
+
       )
     }
     else {
@@ -15,9 +24,18 @@ const commentReplyBanner = props => {
   })
   return(
     <div>
-      <button className="btn btn-white" onClick={props.getReplies}>View Replies</button>
-      {replies}
-      {props.commentId}
+
+      <Collapsible trigger={<button className="btn btn-white" onClick={props.getReplies}>View Replies</button>}>
+        <CommentInput handleSubmit={props.handleSubmit}
+                      onChange={props.handleChange}
+                      AuthUserImage={props.authorImage}
+                      user={props.authorUsername}
+                      authenticted={props.IsAuth}
+                      value={props.value}
+        />
+        {replies}
+      </Collapsible>
+
     </div>
 
   )

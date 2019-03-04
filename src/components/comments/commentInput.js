@@ -11,7 +11,7 @@ const CommentsInput = props => (
           </span>
 
         </div>
-        <textarea name="body" onChange={props.onChange} rows="5" className="form-control" placeholder="Leave a comment" aria-label="With textarea" required />
+        <textarea name="body" onChange={props.onChange} value={props.value} rows="5" className="form-control" placeholder="Leave a comment" aria-label="With textarea" required />
       </div>
       {props.authenticted
         ? <button type="submit" className="btn btn-primary mt-2">Comment</button>
