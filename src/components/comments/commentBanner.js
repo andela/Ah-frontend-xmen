@@ -1,6 +1,7 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
 import parseDate from '../../utils/neededFiles';
+import LikeButton from '../Buttons/LikeButton';
 
 const CommentBanner = (props) => {
   const comment = props.comments.map(comment => (
@@ -31,7 +32,11 @@ const CommentBanner = (props) => {
                 className="fas fa-trash-alt "
               />
             )
-            : null
+            : (
+              <div id="btnlike">
+                <LikeButton />
+              </div>
+            )
         }
 
         </div>
