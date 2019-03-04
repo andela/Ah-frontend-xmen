@@ -96,3 +96,12 @@ export const reportArticleFails = error => ({
   type: REPORT_ARTICLE_FAILS,
   payload: { error },
 });
+
+export const likeCommentSuccessActionCreator = payload => ({
+  type: 'LIKE_COMMENT_SUCCESS',
+  payload,
+});
+export const likeCommentFailActionCreator = error => ({
+  type: 'LIKE_COMMENT_FAIL',
+  error,
+});

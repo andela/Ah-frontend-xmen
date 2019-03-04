@@ -98,5 +98,26 @@ export const UpdateCommentAction = payload => dispatch => fetch(`${BASE_URL}/art
   },
 );
 
-
+export const likeCommentAction = payload => dispatch => fetch(`${BASE_URL}/articles/${payload.articleSlug}/comments/${payload.commentId}/like/`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+  mode: 'cors',
+  body: JSON.stringify(
+    payload,
+  ),
+})
+  .then(response => response.json())
+  .then((json) => {
+    console.log(json);
+    // if ('token' in json) {
+    //   localStorage.setItem('token', json.token);
+    //   dispatch(actions.loginSuccessActionCreator(json));
+    // } else {
+    //   dispatch(actions.loginFailActionCreator(json));
+    // }
+  })
+  .catch(err => err);
 export default getCommentsAction;

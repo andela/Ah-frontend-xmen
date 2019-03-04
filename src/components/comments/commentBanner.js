@@ -31,7 +31,11 @@ const CommentBanner = (props) => {
                 className="fas fa-trash-alt "
               />
             )
-            : null
+            : <i 
+              id={comment.id}
+                onClick={props.onClick}
+                className="fa fa-sm fa-thumbs-up"
+                />
         }
 
         </div>
@@ -67,7 +71,8 @@ const CommentBanner = (props) => {
           </div>
 
         )
-        : null}
+        : null
+        }
 
     </div>
 
@@ -82,7 +87,6 @@ const CommentBanner = (props) => {
         {props.commentsCount}
       </p>
       {comment}
-
 
     </div>
   );

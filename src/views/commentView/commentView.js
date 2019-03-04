@@ -4,16 +4,18 @@ import { ToastContainer } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
 import CommentsInput from '../../components/comments/commentInput';
 import CommentBanner from '../../components/comments/commentBanner';
-import getCommentsAction, { postCommentAction, deleteCommentAction, UpdateCommentAction } from '../../actions/commentActions/commentActions';
+import getCommentsAction, {
+ postCommentAction, deleteCommentAction, UpdateCommentAction, likeCommentAction 
+} from '../../actions/commentActions/commentActions';
 import getAuthUserDetails from '../../actions/authAction';
+
 
 export class CommentView extends Component {
     state={
       body: '',
       open: false,
-
+      isLiked: false,
     }
-
 
     componentDidMount() {
       this.props.getCommentsAction({
@@ -81,6 +83,16 @@ export class CommentView extends Component {
       }
     };
 
+    handleLike = (e) => {
+      this.setState({
+        isLiked: true,
+      });
+      this.props.likeCommentAction({
+        articleSlug: this.props.match.params.slug,
+        commentId: e.target.id,
+      });
+    }
+
     render() {
       const { comments } = this.props.commentsState.payload;
 
@@ -106,6 +118,7 @@ export class CommentView extends Component {
                 handleUpdateSubmit={this.handleUpdateSubmit}
                 handleUpdate={this.handleUpdateChange}
                 open={this.state.open}
+                onClick={this.handleLike}
               />
             )
             }
@@ -117,6 +130,7 @@ export class CommentView extends Component {
 export const mapStateToProps = state => ({
   commentsState: state.comments,
   authState: state.Auth,
+  likeState: state.likeCommentReducer,
 });
 export default withRouter(connect(mapStateToProps, {
   getCommentsAction,
@@ -124,4 +138,5 @@ export default withRouter(connect(mapStateToProps, {
   getAuthUserDetails,
   deleteCommentAction,
   UpdateCommentAction,
+  likeCommentAction,
 })(CommentView));
