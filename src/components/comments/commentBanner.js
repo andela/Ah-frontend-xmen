@@ -1,6 +1,7 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
 import parseDate from '../../utils/neededFiles';
+import CommentReplyView from '../../views/commentView/commentReplyView';
 
 const CommentBanner = (props) => {
   const comment = props.comments.map(comment => (
@@ -68,7 +69,7 @@ const CommentBanner = (props) => {
 
         )
         : null}
-
+      <CommentReplyView commentId={comment.id} />
     </div>
 
 
