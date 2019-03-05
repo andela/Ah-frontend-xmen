@@ -1,14 +1,17 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Parser from 'html-react-parser';
 import StarRatings from 'react-star-ratings';
+import ReactTooltip from 'react-tooltip';
 import LikeButtonView from '../../views/Buttons/LikeButtonView';
 import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
 import EditButton from '../../views/articleEditorView/EditArticleButton';
 import DeleteButton from '../../views/articleEditorView/DeleteArticleButton';
 
-const slug = localStorage.getItem('slug');
 function parseDate(dateString) {
   const date = new Date(dateString);
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -30,7 +33,6 @@ function parseImage(image) {
   if (image !== null) return (<img className="img-respoonsive w-100 mb-5" src={image} alt="article" />);
   return undefined;
 }
-
 
 const ArticleComponent = (props) => {
   let starRatings = (
@@ -57,19 +59,19 @@ const ArticleComponent = (props) => {
     <div className="container p-5">
       <div className="col-m-9 col-s-12 p-5">
         <div className="">
-          <h1 className="display-2">{props.title}</h1>
+          <h1 className="display-2">{props.article.title}</h1>
         </div>
-        <Link to={`/profiles/${props.author.username}`}>
+        <Link to={`/profile/${props.article.author.username}`}>
           <div className="">
-            <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.author.image)} alt="author avatar" />
+            <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.article.author.image)} alt="author avatar" />
             <p className="text-muted align-middle">
-              <strong>{parseName(props.author)}</strong>
+              <strong>{parseName(props.article.author)}</strong>
               {' '}
               <br />
-              {parseDate(props.created_at)}
+              {parseDate(props.article.created_at)}
               {' '}
   &middot;
-              {props.read_time}
+              {props.article.read_time}
             </p>
           </div>
 
@@ -82,7 +84,7 @@ const ArticleComponent = (props) => {
                   <EditButton
                     onClick={props.onClick}
                     slug={props.slug}
-                    username={props.author.username}
+                    username={props.article.author.username}
                   />
 
                 </td>
@@ -90,7 +92,7 @@ const ArticleComponent = (props) => {
                   <DeleteButton
                     onClick={props.onClick}
                     slug={props.slug}
-                    username={props.author.username}
+                    username={props.article.author.username}
                   />
 
                 </td>
@@ -99,11 +101,11 @@ const ArticleComponent = (props) => {
           </table>
         </div>
         <div className="img-respoonsive w-100">
-          {parseImage(props.image)}
+          {parseImage(props.article.image)}
         </div>
 
         <div className="text-justify mb-5">
-          {Parser(String(props.body))}
+          {Parser(String(props.article.body))}
         </div>
         <div>
           <div className="float-left">
@@ -117,15 +119,17 @@ const ArticleComponent = (props) => {
 
           </div>
           <div className="float-right">
-            <span className="m-2"><i className="far fa-bookmark fa-lg" /></span>
-            <a rel="noopener noreferrer" target="_blank" href={props.share_links.fbshare}><span className="m-2"><i className="fab fa-facebook-square  fa-lg" /></span></a>
-            <a rel="noopener noreferrer" target="_blank" href={props.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
-            <a rel="noopener noreferrer" target="_blank" href={props.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
-            <a rel="noopener noreferrer" target="_blank" href={props.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
+            <span data-tip="Bookmark for later" id="bookmark" onClick={props.onBookmark} className={props.isLoggedin ? 'text-default' : 'hidden text-muted'}><span className="m-2"><i className={props.isBookmarked ? 'fas fa-bookmark fa-lg text-default' : 'far fa-bookmark fa-lg'} /></span></span>
+            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.fbshare}><span className="m-2"><i className="fab fa-facebook-square  fa-lg" /></span></a>
+            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
+            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
+            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
             <span className="m-2">
               <i className="fas fa-flag" id="report" onClick={props.onClick} />
             </span>
+
           </div>
+          <ReactTooltip />
         </div>
       </div>
     </div>

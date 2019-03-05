@@ -3,6 +3,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  Tab, Tabs, TabList, TabPanel,
+} from 'react-tabs';
 
 
 function editOwnProfile() {
@@ -13,7 +16,6 @@ function Profile(props) {
   const {
     first_name, last_name, bio, followers, following, username, image,
   } = props.profile;
-
   return (
 
     <div className="container wrapper">
@@ -56,7 +58,30 @@ Following:
           <button type="button" className="btn button-primary" onClick={editOwnProfile} hidden={!props.isOwnProfile}>Edit Profile</button>
         </div>
       </div>
+      <div className="tabs">
+        <Tabs>
+          <TabList>
+            <Tab>Bookmarked Articles</Tab>
+            <Tab>Favorite Articles</Tab>
+          </TabList>
+          <TabPanel>
+            <ul className="list-group">
+
+              {
+                props.bookmarks.length > 0
+                  ? props.bookmarks.map(bookmark => (
+                    <li key={bookmark.slug} className="list-group-item"><a href={`article/${bookmark.slug}`}>{bookmark.title}</a></li>
+                  ))
+                  : <li className="list-group-item">You have no bookmarked articles</li>}
+            </ul>
+          </TabPanel>
+          <TabPanel>
+            Favorite Articles appear here.
+          </TabPanel>
+        </Tabs>
+      </div>
     </div>
+
   );
 }
 Profile.propTypes = {

@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import fetchProfile from '../actions/ProfileActions';
 import Profile from '../components/Profile';
+import bookmarkListing from '../actions/bookmarkListAction';
 
 export class ProfileView extends React.Component {
   constructor(props, { match }) {
@@ -12,7 +13,9 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getProfiles(this.props.match.params.username);
+    this.props.fetchProfile();
+    const { bookmarkListing } = this.props;
+    bookmarkListing();
   }
 
   render() {
@@ -36,7 +39,11 @@ export class ProfileView extends React.Component {
     const isOwnProfile = ownUsername === paramUsername;
     return (
       <div>
-        <Profile profile={this.props.profile} isOwnProfile={isOwnProfile} />
+        <Profile
+          profile={this.props.profile}
+          isOwnProfile={isOwnProfile}
+          bookmarks={this.props.bookmarks}
+        />
       </div>
     );
   }
@@ -47,13 +54,7 @@ const mapStateToProps = state => ({
   profile: state.profileReducer.profile,
   loading: state.profileReducer.loading,
   error: state.profileReducer.error,
+  bookmarks: state.bookmarkListReducer.bookmarks,
 });
 
-
-const mapDispatchToProps = dispatch => ({
-  getProfiles: (username) => {
-    dispatch(fetchProfile(username));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
+export default connect(mapStateToProps, { fetchProfile, bookmarkListing })(ProfileView);

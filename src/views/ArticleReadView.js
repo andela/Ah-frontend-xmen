@@ -6,6 +6,8 @@ import getSingleArticle from '../actions/articleActions/getSingleArticle';
 import CommentView from './commentView/commentView';
 import ratingAction from '../actions/ratingAction';
 
+import bookmarkArticle from '../actions/articleActions/bookmarkArticle';
+import bookmarkListing from '../actions/bookmarkListAction';
 
 function parseShareLinks(article, slug) {
   const articleUrl = `${process.env.FRONTEND_BASE_URL}/articles/${slug}`;
@@ -34,14 +36,22 @@ export class ArticleReadView extends React.Component {
   componentWillMount() {
     const { props } = this;
     const { slug } = props.match.params;
+
     props.getSingleArticle(slug);
     localStorage.setItem('slug', slug);
+    props.bookmarkListing(slug);
   }
 
   componentWillReceiveProps(props) {
-    this.setState({
-      loading: false,
-    });
+    this.setState({ loading: props.article.loading });
+  }
+
+  onBookmark = (event) => {
+    event.preventDefault();
+    const { bookmarkArticle } = this.props;
+    if (this.props.authState.IsAuth) {
+      bookmarkArticle(this.props.match.params.slug, this.props.isBookmarked);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -66,6 +76,7 @@ export class ArticleReadView extends React.Component {
 
   render() {
     const { article } = this.props;
+    const { isBookmarked } = this.props;
     if (this.state.loading) {
       return (
         <div className="h-100 w-100 p-5 m-5  text-center">
@@ -88,10 +99,13 @@ export class ArticleReadView extends React.Component {
     return (
       <div>
         <ArticlComponent
+          article={article}
           slug={this.props.match.params.slug}
-          {...article}
           onClick={this.handleFlag}
           changeRating={onRating}
+          onBookmark={this.onBookmark}
+          isBookmarked={isBookmarked}
+          isLoggedin={this.props.authState.IsAuth}
         />
         <CommentView />
         <ToastContainer />
@@ -101,8 +115,14 @@ export class ArticleReadView extends React.Component {
 }
 
 export const mapStateToProps = state => ({
-  article: state.articleReducer.article,
   loading: state.articleReducer.loading,
-
+  article: state.articleReducer.article,
+  bookmarks: state.bookmarkListReducer.bookmarks,
+  isBookmarked: state.bookmarkListReducer.isBookmarked,
+  authState: state.Auth,
 });
-export default connect(mapStateToProps, { getSingleArticle, ratingAction })(ArticleReadView);
+
+export default connect(mapStateToProps,
+  {
+    getSingleArticle, bookmarkArticle, bookmarkListing, ratingAction,
+  })(ArticleReadView);

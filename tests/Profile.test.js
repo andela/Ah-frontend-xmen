@@ -5,7 +5,12 @@ import Profile from '../src/components/Profile';
 
 describe('<Profile />', () => {
   const props = {
-    fetchProfile: () => jest.fn(),
+    fetchProfile: jest.fn(),
+    bookmarkListing: jest.fn(),
+    bookmarks: [{
+      title: 'deed',
+      slug: 'dedededed',
+    }],
     profile: {
       bio: 'hello',
       first_name: 'maria',
@@ -13,6 +18,7 @@ describe('<Profile />', () => {
       following: 0,
       followers: 0,
     },
+    map: jest.fn(),
   };
 
   it('tests the profile component matches the snapshot', () => {
