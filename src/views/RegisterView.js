@@ -30,6 +30,11 @@ export class RegisterView extends Component {
     });
   }
 
+  loginTrigger = (event) => {
+    event.preventDefault();
+    this.props.onLoginTrigger();
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
     const { registerUser } = this.props;
@@ -43,7 +48,7 @@ export class RegisterView extends Component {
           { signupState.message}
         </p>,
       );
-      setTimeout(() => window.location.reload(), 7000);
+      setTimeout(() => window.location.reload(), 2000);
     }
   }
 
@@ -80,8 +85,9 @@ Password:
         <SignupForm
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
+          onLoginTrigger={this.loginTrigger}
         />
-        <ToastContainer autoClose={6000} />
+        <ToastContainer autoClose={1000} />
       </div>
     );
   }

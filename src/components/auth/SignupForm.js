@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
 import SocialAuthButtons from '../../views/socialAuthView/socialAuthView';
@@ -5,7 +6,7 @@ import SocialAuthButtons from '../../views/socialAuthView/socialAuthView';
 const SignupForm = props => (
   <div className="card-body px-lg-3  py-lg-3">
     <div className="text-center">
-      <h3 className="text-center text-dark">Register</h3>
+      <h3 className="text-primary">Signup with</h3>
       <SocialAuthButtons onSuccess={props.onSuccess} />
     </div>
     <div className="row p-3">
@@ -40,6 +41,11 @@ const SignupForm = props => (
       </div>
       <div className="text-center">
         <input type="submit" className="btn btn-block button-primary my-4" value="Sign Up" />
+      </div>
+      <div className="text-center">
+Already have an account,
+        <a href="#" onClick={props.onLoginTrigger}> Login</a>
+
       </div>
     </form>
   </div>

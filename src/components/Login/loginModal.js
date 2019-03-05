@@ -3,10 +3,10 @@ import Modal from 'react-responsive-modal';
 import PropTypes from 'prop-types';
 import LoginView from '../../views/loginView/LoginView';
 
-const LoginModal = ({ open, onClose }) => (
+const LoginModal = ({ open, onClose, onOpenSignup }) => (
   <div>
     <Modal open={open} onClose={onClose} classNames={{ modal: 'col col-md-6 col-sm-12 col-lg-4 col-offset-lg-3 col-offset-4' }}>
-      <LoginView />
+      <LoginView onOpenSignup={onOpenSignup} />
     </Modal>
   </div>
 );

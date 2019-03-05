@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
 import fetchProfile from '../actions/ProfileActions';
@@ -38,6 +36,9 @@ export class ProfileView extends React.Component {
 
   handleUnfollow = () => {
     this.props.unfollowAction(this.props.match.params.username);
+    this.props.fetchProfile();
+    const { bookmarkListing } = this.props;
+    bookmarkListing();
   }
 
   render() {

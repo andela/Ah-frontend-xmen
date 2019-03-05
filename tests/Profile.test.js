@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Profile from '../src/components/Profile';
 
 describe('<Profile />', () => {
-  let props = {
+  const props = {
     fetchProfile: jest.fn(),
     bookmarkListing: jest.fn(),
     bookmarks: [{

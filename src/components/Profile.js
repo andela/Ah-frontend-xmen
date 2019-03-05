@@ -2,10 +2,10 @@
 /* eslint-disable react/no-unused-prop-types */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Tab, Tabs, TabList, TabPanel,
 } from 'react-tabs';
-import { Link } from 'react-router-dom';
 
 
 function editOwnProfile() {
@@ -107,5 +107,14 @@ class Profile extends React.Component {
     );
   }
 }
+
+Profile.defaultProps = {
+  first_name: '',
+  last_name: '',
+  bio: '',
+  followers: 0,
+  following: 0,
+  image: '',
+};
 
 export default Profile;

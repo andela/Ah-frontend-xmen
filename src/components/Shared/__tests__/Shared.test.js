@@ -24,7 +24,32 @@ describe('Shared Components', () => {
 
   it('should call onModalClose', () => {
     const wrapper = shallow(<Header {...props} />);
-    expect(wrapper.instance().onModalClose({ preventDefault() {} })).toEqual(<Redirect push={false} to="/" />);
+    expect(wrapper.instance().onModalClose({ preventDefault() {} })).toEqual(
+      <Redirect push={false} to="/" />,
+    );
+  });
+
+  it('should call onLoginModalClose', () => {
+    const wrapper = shallow(<Header {...props} />);
+    wrapper.instance().onCloseLoginModal();
+    expect(wrapper.instance().state).toEqual({
+      open: false,
+      openLoginModal: false,
+      active: '',
+      isShowing: false,
+    });
+  });
+
+  it('should call onOpenLoginModal', () => {
+    const wrapper = shallow(<Header {...props} />);
+
+    wrapper.instance().onOpenLoginModal();
+    expect(wrapper.instance().state).toEqual({
+      open: false,
+      openLoginModal: true,
+      active: '',
+      isShowing: false,
+    });
   });
 
   it('should call onModalOen', () => {
