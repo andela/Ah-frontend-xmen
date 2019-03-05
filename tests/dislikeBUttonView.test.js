@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { toast } from 'react-toastify';
 import { DislikeButtonView } from '../src/views/Buttons/DislikeButtonView';
 
 
@@ -18,28 +17,6 @@ describe('DislikeButtonView', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call toast.error with error', () => {
-    const props = {
-      getDislikeStatus: jest.fn(),
-      dislikeState: {
-        disliked: false,
-        dislikesCount: 0,
-      },
-    };
-    const wrapper = shallow(<DislikeButtonView {...props} />);
-    const nextProps = {
-      dislikeState: {
-        errorMessage: {
-          dislike: 'you must login first',
-        },
-      },
-
-    };
-
-    toast.error = jest.fn();
-    wrapper.instance().componentWillReceiveProps(nextProps);
-    expect(toast.error).toHaveBeenCalled();
-  });
 
   it('should call dispatch action on handledislike', () => {
     const props = {

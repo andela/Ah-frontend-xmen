@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import getSingleArticle from '../getSingleArticle';
 import { ARTICLE_FETCH_NOT_FOUND, ARTICLE_FETCH_SUCCESSFUL } from '../../ActionTypes';
+import { BASE_URL } from '../../../constants';
 
 const mockStore = configureStore([thunk]);
 const slug = 'slug-is-as12';
@@ -18,7 +19,7 @@ describe('getSingleArticle', () => {
         payload: [],
       },
     ];
-    fetchMock.getOnce(`https://ah-backend-xmen-staging.herokuapp.com/api/articles/${slug}/`,
+    fetchMock.getOnce(`${BASE_URL}/articles/${slug}/`,
       {
         body: {
           articles: [],
@@ -43,7 +44,7 @@ describe('getSingleArticle', () => {
         payload: null,
       },
     ];
-    fetchMock.getOnce(`https://ah-backend-xmen-staging.herokuapp.com/api/articles/${slug}/`,
+    fetchMock.getOnce(`${BASE_URL}/articles/${slug}/`,
       {
         body: {},
         status: 404,

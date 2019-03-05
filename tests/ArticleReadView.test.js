@@ -99,4 +99,41 @@ describe('ArticleReadView', () => {
       loading: true,
     });
   });
+
+  it('should call getSingleAction after rating', () => {
+    const props = {
+      articleReducer: {
+        article: {
+          title: 'test title',
+        },
+      },
+      match: {
+        params: {
+          slug: 'slug-as12',
+        },
+      },
+      getSingleArticle: jest.fn(),
+      ratingAction: jest.fn(),
+    };
+    global.setTimeout = jest.fn();
+    jest.useFakeTimers();
+    const instance = new ArticleReadView(props);
+    instance.changeRating(5, props.slug);
+    expect(global.setTimeout).toHaveBeenCalled();
+    expect(global.setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
+    jest.runAllTimers();
+  });
+
+  it('should map state to props', () => {
+    const state = {
+      articleReducer: {
+        article: {},
+        loading: true,
+      },
+    };
+    expect(mapStateToProps(state)).toEqual({
+      article: {},
+      loading: true,
+    });
+  });
 });

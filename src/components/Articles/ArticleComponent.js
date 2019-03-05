@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Parser from 'html-react-parser';
+import StarRatings from 'react-star-ratings';
 import LikeButtonView from '../../views/Buttons/LikeButtonView';
 import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
 import EditButton from '../../views/articleEditorView/EditArticleButton';
@@ -31,83 +32,104 @@ function parseImage(image) {
 }
 
 
-const ArticleComponent = props => (
-  <div className="container p-5">
-    <div className="col-m-9 col-s-12 p-5">
-      <div className="">
-        <h1 className="display-2">{props.title}</h1>
-      </div>
-      <Link to={`/profiles/${props.author.username}`}>
+const ArticleComponent = (props) => {
+  let starRatings = (
+    <StarRatings
+      name={props.slug}
+      rating={props.average_rating}
+      starRatedColor=" #FFD700"
+      starDimension="20px"
+      starSpacing="3px"
+      changeRating={props.changeRating}
+    />
+  );
+  if (props.changeRating === null) {
+    starRatings = (
+      <span className=" text-muted">
+        {' '}
+        {props.average_rating}     <i className="fa fa-star" style={{ color: '#FFD700' }} aria-hidden="true" />
+      </span>
+    );
+  }
+  return (
+    <div className="container p-5">
+      <div className="col-m-9 col-s-12 p-5">
         <div className="">
-          <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.author.image)} alt="author avatar" />
-          <p className="text-muted align-middle">
-            <strong>{parseName(props.author)}</strong>
-            {' '}
-            <br />
-            {parseDate(props.created_at)}
-            {' '}
+          <h1 className="display-2">{props.title}</h1>
+        </div>
+        <Link to={`/profiles/${props.author.username}`}>
+          <div className="">
+            <img className="rounded-circle float-left mr-3 avatar" src={parseAvatar(props.author.image)} alt="author avatar" />
+            <p className="text-muted align-middle">
+              <strong>{parseName(props.author)}</strong>
+              {' '}
+              <br />
+              {parseDate(props.created_at)}
+              {' '}
   &middot;
-            {props.read_time}
-          </p>
+              {props.read_time}
+            </p>
+          </div>
+
+        </Link>
+        <div className="mb-4">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <EditButton
+                    onClick={props.onClick}
+                    slug={props.slug}
+                    username={props.author.username}
+                  />
+
+                </td>
+                <td>
+                  <DeleteButton
+                    onClick={props.onClick}
+                    slug={props.slug}
+                    username={props.author.username}
+                  />
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="img-respoonsive w-100">
+          {parseImage(props.image)}
         </div>
 
-      </Link>
-      <div className="mb-4">
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <EditButton
-                  onClick={props.onClick}
-                  slug={props.slug}
-                  username={props.author.username}
-                />
-
-              </td>
-              <td>
-                <DeleteButton
-                  onClick={props.onClick}
-                  slug={props.slug}
-                  username={props.author.username}
-                />
-
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="img-respoonsive w-100">
-        {parseImage(props.image)}
-      </div>
-
-      <div className="text-justify mb-5">
-        {Parser(String(props.body))}
-      </div>
-      <div>
-        <div className="float-left">
-          <LikeButtonView slug={props.slug} likesCount={props.likes_count} isLikeBtn />
-          <DislikeButtonView
-            slug={props.slug}
-            dislikesCount={props.dislikes_count}
-            isLikeBtn={false}
-          />
-
+        <div className="text-justify mb-5">
+          {Parser(String(props.body))}
         </div>
-        <div className="float-right">
-          <span className="m-2"><i className="far fa-bookmark fa-lg" /></span>
-          <a rel="noopener noreferrer" target="_blank" href={props.share_links.fbshare}><span className="m-2"><i className="fab fa-facebook-square  fa-lg" /></span></a>
-          <a rel="noopener noreferrer" target="_blank" href={props.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
-          <a rel="noopener noreferrer" target="_blank" href={props.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
-          <a rel="noopener noreferrer" target="_blank" href={props.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
-          <span className="m-2">
-            <i className="fas fa-flag" id="report" onClick={props.onClick} />
-          </span>
+        <div>
+          <div className="float-left">
+            <LikeButtonView slug={props.slug} likesCount={props.likes_count} isLikeBtn />
+            <DislikeButtonView
+              slug={props.slug}
+              dislikesCount={props.dislikes_count}
+              isLikeBtn={false}
+            />
+            {starRatings}
+
+          </div>
+          <div className="float-right">
+            <span className="m-2"><i className="far fa-bookmark fa-lg" /></span>
+            <a rel="noopener noreferrer" target="_blank" href={props.share_links.fbshare}><span className="m-2"><i className="fab fa-facebook-square  fa-lg" /></span></a>
+            <a rel="noopener noreferrer" target="_blank" href={props.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
+            <a rel="noopener noreferrer" target="_blank" href={props.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
+            <a rel="noopener noreferrer" target="_blank" href={props.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
+            <span className="m-2">
+              <i className="fas fa-flag" id="report" onClick={props.onClick} />
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-);
+  );
+};
 
 
 export default ArticleComponent;

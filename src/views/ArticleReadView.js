@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import ArticlComponent from '../components/Articles/ArticleComponent';
 import getSingleArticle from '../actions/articleActions/getSingleArticle';
 import CommentView from './commentView/commentView';
+import ratingAction from '../actions/ratingAction';
 
 
 function parseShareLinks(article, slug) {
@@ -24,13 +25,11 @@ export class ArticleReadView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notFound: false,
       loading: true,
-
     };
     this.handleFlag = this.handleFlag.bind(this);
+    this.changeRating = this.changeRating.bind(this);
   }
-
 
   componentWillMount() {
     const { props } = this;
@@ -56,6 +55,15 @@ export class ArticleReadView extends React.Component {
     }
   }
 
+  changeRating(newRating, slug) {
+    this.props.ratingAction(slug, newRating);
+    setTimeout(() => {
+      const { props } = this;
+      const { slug } = props.match.params;
+      props.getSingleArticle(slug);
+    }, 500);
+  }
+
   render() {
     const { article } = this.props;
     if (this.state.loading) {
@@ -74,14 +82,16 @@ export class ArticleReadView extends React.Component {
       );
     }
 
-    article.share_links = parseShareLinks(article, this.props.match.params.slug);
 
+    article.share_links = parseShareLinks(article, this.props.match.params.slug);
+    const onRating = article.user_rated ? this.changeRating : null;
     return (
       <div>
         <ArticlComponent
           slug={this.props.match.params.slug}
           {...article}
           onClick={this.handleFlag}
+          changeRating={onRating}
         />
         <CommentView />
         <ToastContainer />
@@ -93,5 +103,6 @@ export class ArticleReadView extends React.Component {
 export const mapStateToProps = state => ({
   article: state.articleReducer.article,
   loading: state.articleReducer.loading,
+
 });
-export default connect(mapStateToProps, { getSingleArticle })(ArticleReadView);
+export default connect(mapStateToProps, { getSingleArticle, ratingAction })(ArticleReadView);
