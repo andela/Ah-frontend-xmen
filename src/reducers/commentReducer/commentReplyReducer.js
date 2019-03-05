@@ -6,6 +6,7 @@ const initialState = {
   repliesCount:"",
   replyCreateSuccess:false,
   replyDeleteSuccess:false,
+  replyUpdateSuccess:false,
   errors:""
 }
 
@@ -36,21 +37,59 @@ const commentReplyReducer =(state=initialState,action) => {
         replyCreateSuccess:false,
         errors: action.errors
       }
+    case (ActionTypes.DELETE_COMMENT_START):
+    {
+      const replies = state.payload
+      const results = replies.filter( reply => {
+      return reply.id !== parseInt(action.reply_id)
+      });
+      return {
+        ...state,
+        payload: results
+      }
+
+    };
     case (ActionTypes.DELETE_ARTICLE_SUCCESS):
-      return{
+      return {
         ...state,
         replyDeleteSuccess: true,
+    }
 
-      }
     case (ActionTypes.DELETE_COMMENT_FAIL):
+      return {
+        ...state,
+        replyDeleteSuccess: false,
+        errors: action.errors
+      }
+    case(ActionTypes.UPDATE_COMMENT_REPLY_BEGIN):
+    {
+      let replies = state.payload
+      const results = replies.map((reply,index) => {
+        if(reply.id !== parseInt(action.reply_id)){
+            return reply
+          }
+        else {
+          reply.reply_body = action.body
+          return{
+            ...reply
+          }
+        }
+      });
+      console.log('======> replies',replies)
+      console.log('======>new',results)
       return{
         ...state,
-        replyDeleteSuccess:false,
-        errors: action.errors
+        payload: results
+      }
+    }
+    case (ActionTypes.UPDATE_COMMENT_REPLY_SUCCESS):
+      return {
+        ...state,
+        replyUpdateSuccess: true,
       }
     default:
       return state
 
   }
 };
-export  default commentReplyReducer
+export  default commentReplyReducer;

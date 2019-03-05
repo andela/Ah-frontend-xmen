@@ -3,20 +3,24 @@ import CommentReplyBanner from '../../components/comments/commentReplyBanner';
 import { getCommentReplies } from '../../actions/commentActions/commentReplyActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { createCommentReplyAction, deleteCommentReplyAction } from '../../actions/commentActions/commentReplyActions';
+import { createCommentReplyAction, deleteCommentReplyAction, updateCommentReplyAction }
+    from '../../actions/commentActions/commentReplyActions';
 import {ToastContainer} from 'react-toastify';
 
-class CommentReplyView extends Component {
+export class CommentReplyView extends Component {
 
   state = {
-    reply_body:""
-  }
+    reply_body:"",
+    updateBody:"",
+  };
+
 
   handleChange = e => {
    this.setState({
-     reply_body:e.target.value
+     reply_body: e.target.value
    })
   };
+
   handleSubmit = e => {
     e.preventDefault()
     this.props.createCommentReplyAction({
@@ -24,7 +28,6 @@ class CommentReplyView extends Component {
       commentId: this.props.commentId,
       reply_body: this.state
     })
-
     setTimeout(()=>{
       this.props.getCommentReplies({
         slug:this.props.match.params.slug,
@@ -32,56 +35,53 @@ class CommentReplyView extends Component {
       })
     },500)
 
-  }
+  };
 
-  handleFetch = (e) => {
+  handleFetch = () => {
     this.props.getCommentReplies({
       slug: this.props.match.params.slug,
       commentId: this.props.commentId
     })
-  }
-  handleDelete = (e) => {
-    let replies = this.props.commentReplyState.payload
+  };
 
+  handleDelete = (e) => {
     this.props.deleteCommentReplyAction({
       slug: this.props.match.params.slug,
       commentId: this.props.commentId,
       reply_id: e.target.id
+    });
+  };
+
+  handleUpdateChange = e => {
+   this.setState({
+     updateBody: e.target.value
+   })
+  };
+
+  handleUpdateSubmit = e => {
+    e.preventDefault();
+    this.props.updateCommentReplyAction({
+      slug: this.props.match.params.slug,
+      commentId: this.props.commentId,
+      reply_id: e.target.id,
+      reply_body: this.state.updateBody
     })
 
-    // setTimeout(()=>{
-    //   // this.props.getCommentReplies({
-    //   //   slug: this.props.match.params.slug,
-    //   //   commentId: this.props.commentId
-    //   // })
-    //   window.location.reload()
-    // },2000)
+  };
 
-  }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    console.log(nextProps.commentReplyState.replyDeleteSuccess)
+  componentWillReceiveProps(nextProps) {
     if(nextProps.commentReplyState.isSuccessful){
       this.setState({
         reply_body:""
       })
     }
-    else if(nextProps.commentReplyState.replyDeleteSuccess){
-      this.props.getCommentReplies({
-        slug: this.props.match.params.slug,
-        commentId: this.props.commentId
-      })
-    }
+  };
 
-
-  }
-  componentWillUpdate(nextProps, nextState, nextContext) {
-    console.log('will update')
-  }
 
   render() {
     const replies = this.props.commentReplyState.payload;
-    return(
+    return (
       <div>
         <CommentReplyBanner getReplies={this.handleFetch}
                             commentId={this.props.commentId}
@@ -94,6 +94,8 @@ class CommentReplyView extends Component {
                             handleSubmit={this.handleSubmit}
                             value={this.state.reply_body}
                             deleteReply={this.handleDelete}
+                            updateSubmit={this.handleUpdateSubmit}
+                            handleUpdateChange={this.handleUpdateChange}
           />
           <ToastContainer/>
       </div>
@@ -106,8 +108,7 @@ export const mapStateToProps = state => {
     commentReplyState:state.commentReplies,
     authState:state.Auth
   }
+};
 
-
-}
-
-export default withRouter(connect(mapStateToProps ,{ getCommentReplies, createCommentReplyAction, deleteCommentReplyAction }) (CommentReplyView));
+export default withRouter(connect(mapStateToProps ,{ getCommentReplies, createCommentReplyAction,
+  deleteCommentReplyAction, updateCommentReplyAction }) (CommentReplyView));

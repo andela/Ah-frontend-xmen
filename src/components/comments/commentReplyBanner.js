@@ -1,21 +1,31 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
 import CommentInput from '../../components/comments/commentInput';
-import CommentsInput from '../../views/commentView/commentView';
+
+
 const commentReplyBanner = props => {
   const replies=props.replyList.map(reply=>{
     if(props.commentId === reply.comment){
       return(
-        <div key={reply.id} className="shadow container p-5">
+        <div key={reply.id} className="container">
           <p >{reply.id}</p>
           <p>{reply.reply_body}</p>
           <p>{reply.author.username}</p>
           {props.user===reply.author.username ?
             <button className="btn btn-danger" id={reply.id} onClick={props.deleteReply}>Remove</button>
             : null}
-        </div>
+          {props.user === reply.author.username ?
+            <Collapsible trigger={<button className="btn btn-primary">Update</button>}>
+              <form onSubmit={props.updateSubmit} id={reply.id}>
+                <textarea id="comment-reply" defaultValue={reply.reply_body} onChange={props.handleUpdateChange} name="reply_body"></textarea>
+                <button className="btn btn-outline-info" type="submit">update</button>
+              </form>
 
-      )
+            </Collapsible>
+            : null}
+            <hr/>
+        </div>
+      );
     }
     else {
       return null
