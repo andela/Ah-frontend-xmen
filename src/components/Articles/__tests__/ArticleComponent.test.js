@@ -16,6 +16,7 @@ describe('<ArticleComponent', () => {
           twshare: '',
           mailshare: '',
         },
+        tags: ['hey'],
       },
     };
     let wrapper = shallow(<ArticleComponent {...props} />);
@@ -37,6 +38,7 @@ describe('<ArticleComponent', () => {
           twshare: '',
           mailshare: '',
         },
+        tags: ['hey'],
       },
     };
     wrapper = shallow(<ArticleComponent {...props} />);

@@ -14,6 +14,7 @@ import articleEditorReducer from './articleEditorReducer';
 import bookmarkListReducer from './bookmarkListReducer';
 import profileListReducer from './profileListReducer';
 import followReducer from './followReducer';
+import tagsListReducer from './tagsListReducer';
 
 
 export default combineReducers({
@@ -32,4 +33,5 @@ export default combineReducers({
   bookmarkListReducer,
   profileListReducer,
   followReducer,
+  tagsListReducer,
 });
