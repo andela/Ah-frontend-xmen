@@ -49,13 +49,13 @@ const commentReplyReducer =(state=initialState,action) => {
       }
 
     };
-    case (ActionTypes.DELETE_ARTICLE_SUCCESS):
+    case (ActionTypes.DELETE_COMMENT_REPLY_SUCCESS):
       return {
         ...state,
         replyDeleteSuccess: true,
     }
 
-    case (ActionTypes.DELETE_COMMENT_FAIL):
+    case (ActionTypes.DELETE_COMMENT_REPLY_FAIL):
       return {
         ...state,
         replyDeleteSuccess: false,
@@ -75,8 +75,6 @@ const commentReplyReducer =(state=initialState,action) => {
           }
         }
       });
-      console.log('======> replies',replies)
-      console.log('======>new',results)
       return{
         ...state,
         payload: results

@@ -4,10 +4,10 @@ import {toast} from 'react-toastify'
 const token =localStorage.getItem('token')
 
 export const getCommentReplies = (payload) => dispatch => {
-  return fetch(`${BASE_URL}/articles/${payload.slug}/comments/${payload.commentId}/reply`).then(
+  return fetch(`${BASE_URL}/articles/${payload.slug}/comments/${payload.commentId}/reply/`).then(
     res=>res.json()
   ).then(
-    data=>{
+    data => {
       if (data.replies) {
         dispatch({
           type:ActionTypes.GET_COMMENT_REPLIES_SUCCESS,
@@ -15,10 +15,10 @@ export const getCommentReplies = (payload) => dispatch => {
           replyCount:data.repliesCount
         })
       }
-      else {
+      else if(data.errors) {
         dispatch({
-          type:ActionTypes.GET_COMMENT_REPLIES_FAIL,
-          payload:data
+          type: ActionTypes.GET_COMMENT_REPLIES_FAIL,
+          payload: data.errors
         })
       }
     }
@@ -38,10 +38,16 @@ export const createCommentReplyAction = payload => dispatch => {
   ).then(data=>{
       if(data.reply){
         dispatch({
-          type:ActionTypes.CREATE_COMMENT_REPLY_SUCCESS
+          type: ActionTypes.CREATE_COMMENT_REPLY_SUCCESS
         })
+        toast.success('Reply added');
       }
-      toast.success('Reply added')
+      else if(data.errors){
+        dispatch({
+          type:ActionTypes.CREATE_COMMENT_REPLY_FAIL,
+          payload:data.errors
+        })
+    }
   });
 }
 
@@ -60,8 +66,8 @@ export const deleteCommentReplyAction = payload => dispatch => {
       });
       if(data.message === "reply delete successfully"){
         dispatch({
-          type: ActionTypes.DELETE_ARTICLE_SUCCESS,
-          reply_id: parseInt(payload.reply_body_id)
+          type: ActionTypes.DELETE_COMMENT_REPLY_SUCCESS,
+          reply_id: payload.reply_body_id
         })
         toast.success('Reply deleted')
       };
@@ -85,12 +91,12 @@ export  const updateCommentReplyAction = payload => dispatch => {
         body:payload.reply_body,
         reply_id:payload.reply_id
       })
-      if(data.erros){
+      if(data.errors){
        dispatch({
          type: ActionTypes.UPDATE_COMMENT_REPLY_FAIL,
-         errors: data.erros
+         errors: data.errors
        })
-        toast.error(data.erros)
+        toast.error(data.errors)
       }
       else if(data.data){
         dispatch({

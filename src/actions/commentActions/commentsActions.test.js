@@ -32,7 +32,6 @@ describe('async actions for comments', () => {
     });
   });
   it('should dispatch GET COMMENTS FAIL ', () => {
-    // let articleSlug='random-qq'
     fetchMock.getOnce(`${BASE_URL}/articles/andela-now-qwpmf/comments/`, {
       body: { errors: {} },
       headers: { 'content-type': 'application/json' },
