@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ArticleCard } from './ArticleCard';
 import fetchArticlesAction from '../../actions/articleActions/fetchArticlesAction';
+import Paginations from '../../views/PaginationView';
 
 export class Articles extends Component {
   componentWillMount = () => {
     this.props.fetchArticlesAction();
-  }
+  };
 
   render() {
     const { articles } = this.props;
+
     const articleItems = articles.map((article, index) => {
       if (!article.image) {
         article.image = `http://loremflickr.com/700/430?random=${index}`;
       }
-      return (
-        <ArticleCard key={article.slug} {...article} />
-      );
+      return <ArticleCard key={article.slug} {...article} />;
     });
 
     return (
@@ -43,6 +43,7 @@ export class Articles extends Component {
                 <hr className="hr mb-5 mt-5" />
                 <div className="row row-grid">{articleItems}</div>
               </div>
+              <Paginations updated={this.updateArticles} />
             </div>
           </div>
         </section>

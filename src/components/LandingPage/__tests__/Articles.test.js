@@ -6,9 +6,8 @@ const props = {
   fetchArticlesAction: jest.fn(),
   articles: [
     {
-      title: '',
+      title: 'test',
       image: '',
-
       slug: 'slu-sad',
     },
   ],

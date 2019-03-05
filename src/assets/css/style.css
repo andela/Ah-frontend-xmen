@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 html, body{
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
@@ -12,7 +13,14 @@ html, body{
   background-repeat: no-repeat;
   height: 550px;
   background-size: cover;
-} 
+}
+.sections{
+  width: 100%;
+  background-image: url(https://res.cloudinary.com/soultech/image/upload/v1550683268/authors%20haven%20pics/books-knowledge.jpg);
+  background-repeat: no-repeat;
+  height: 270px;
+  background-size: cover;
+}
 .wrapper {
   width: 65% !important;
   margin: 50px auto !important;
@@ -142,5 +150,56 @@ html, body{
 
 .article-items{
   display: inline;
+}
+
+/* the dropdown css */
+
+.dropdown {
+  width: 100%; 
+  background: #ffffff;
+  text-align: center;
+  transition: all 0.25s ease-out;
+  transform: scale(0);
+  transform-origin: 100% 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.dropdown li {
+  display: block;
+  width: 100%;
+}
+
+.dropdown button {
+  display: block;
+  width: 100%;
+}
+
+.dropdown li a {
+  width: 100%;
+  padding: 1em 18px;
+  display: inline-block;
+  white-space: pre;
+  box-sizing: border-box;
+}
+
+.dropdown li a:hover { 
+    background-color: #6457dd;
+    color: white !important;
+}
+
+.dropdown.active {
+  transform: scale(1);
+  transition: all 0.25s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  
+}
+
+.material-dropdown{
+    height: 0px;
+    float: left;
+    margin-top: -17px;
+}
+
+.dd-click:focus{
+  outline: none;
 }
 

@@ -5,15 +5,18 @@ describe('Article reducers', () => {
   it('should fetch articles', () => {
     const initialState = {
       articles: [],
+      currentPage: 1,
+      allArticles: 1,
     };
     const action = {
       type: ActionTypes.FETCH_ARTICLES_SUCCESS,
-      payload: { articles: { articles: {} } },
+      payload: { results: [{ title: 'title' }], count: 1 },
     };
 
     const expected = {
       ...initialState,
-      articles: { articles: { articles: {} } },
+      articles: [{ title: 'title' }],
+      allArticles: 1,
     };
 
     const newState = fetchArticlesReducer(initialState, action);

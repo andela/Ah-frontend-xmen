@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import RegisterModal from '../auth/RegisterModal';
 import LoginModal from '../Login/loginModal';
+import getAuthUserDetails from '../../actions/authAction';
 
-class Banner extends Component {
+export class Banner extends Component {
   state = {
     open: false,
     openLoginModal: false,
@@ -30,28 +32,55 @@ onCloseLoginModal = () => {
 
 render() {
   const { open, openLoginModal } = this.state;
-  return (
-    <div>
-      <section className="section box-flex">
-        <div className="welcome">
-          <div className="introduction">
-            <h1>A Social platform for the creative at heart</h1>
-            <p className="intro-text">
-          Create a community of like minded authors to foster inspiration and
-          innovation by leveraging the modern web.
-            </p>
-            <div className="mt-4 p-0 float-left">
-              <button type="submit" id="modalLauncher" onClick={this.onModalOpen} className="btn button-primary mr-3">Get Started</button>
-              <button type="button" onClick={this.onOpenLoginModal} className="btn ml-2 login-banner">Login</button>
-              <LoginModal open={openLoginModal} onClose={this.onCloseLoginModal} />
-            </div>
+
+  const guestBanner = (
+    <section className="section box-flex">
+      <div className="container welcome">
+        <div className="introduction">
+          <h1>A Social platform for the creative at heart</h1>
+          <p>
+        Create a community of like minded authors to foster inspiration and
+        innovation by leveraging the modern web.
+          </p>
+          <div className="mt-4 p-0 float-left">
+            <button type="submit" id="modalLauncher" onClick={this.onModalOpen} className="btn button-primary mr-3">Get Started</button>
+            <button type="button" onClick={this.onOpenLoginModal} className="btn ml-2 login-banner">Login</button>
+            <LoginModal open={openLoginModal} onClose={this.onCloseLoginModal} />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+
+  const userBanner = (
+    <section className="sections">
+      <div className="container welcome-head">
+        <div className="introduction mt-5">
+          <h1>Welcome to Authors Haven</h1>
+          <div className="mt-4 p-0 float-left">
+            <a href="/editor" className="btn button-primary btn-success">Create an article</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  return (
+    <div>
+      {this.props.auth.IsAuth ? userBanner : guestBanner}
       <RegisterModal open={open} onModalClose={this.onModalClose} />
     </div>
   );
 }
 }
 
-export default Banner;
+function mapStateToProps(state) {
+  return {
+    auth: state.Auth,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { getAuthUserDetails },
+)(Banner);

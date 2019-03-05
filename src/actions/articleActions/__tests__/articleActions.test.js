@@ -16,18 +16,11 @@ describe('fetch async actions', () => {
 
   it('it should fetch all articles', () => {
     fetchMock.getOnce(
-      `${BASE_URL}/articles/?limit=6`,
+      `${BASE_URL}/articles/?limit=6&page=1`,
       {
         headers: { 'content-type': 'application/json' },
         body: {
-          articles: {
-            results: [
-              {
-                title: 'this is a title',
-                body: 'this is a body',
-              },
-            ],
-          },
+          articles: [],
         },
       },
     );
@@ -35,16 +28,9 @@ describe('fetch async actions', () => {
     const expectedActions = [
       {
         type: actionsTypes.FETCH_ARTICLES_SUCCESS,
-        payload:
-            [
-              {
-                title: 'this is a title',
-                body: 'this is a body',
-              },
-            ],
+        payload: [],
       },
     ];
-
     return store.dispatch(fetchArticlesAction()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
