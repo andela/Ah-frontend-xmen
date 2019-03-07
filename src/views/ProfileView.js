@@ -5,17 +5,39 @@ import { connect } from 'react-redux';
 import fetchProfile from '../actions/ProfileActions';
 import Profile from '../components/Profile';
 import bookmarkListing from '../actions/bookmarkListAction';
+import followAction from '../actions/followActions/followAction';
+import unfollowAction from '../actions/followActions/unfollowAction';
 
 export class ProfileView extends React.Component {
   constructor(props, { match }) {
     super(props, { match });
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.state = {
+      is_following: false,
+    };
   }
 
   componentDidMount() {
-    this.props.fetchProfile();
+    this.props.fetchProfile(this.props.match.params.username);
     const { bookmarkListing } = this.props;
     bookmarkListing();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      is_following: nextProps.profile.is_following,
+    });
+    if (nextProps.followState !== undefined) {
+      this.setState({ is_following: nextProps.followState });
+    }
+  }
+
+  handleFollow = () => {
+    this.props.followAction(this.props.match.params.username);
+  }
+
+  handleUnfollow = () => {
+    this.props.unfollowAction(this.props.match.params.username);
   }
 
   render() {
@@ -43,18 +65,24 @@ export class ProfileView extends React.Component {
           profile={this.props.profile}
           isOwnProfile={isOwnProfile}
           bookmarks={this.props.bookmarks}
+          is_following={this.state.is_following}
+          onFollow={this.handleFollow}
+          onUnfollow={this.handleUnfollow}
         />
       </div>
     );
   }
 }
 
-
 const mapStateToProps = state => ({
   profile: state.profileReducer.profile,
   loading: state.profileReducer.loading,
   error: state.profileReducer.error,
   bookmarks: state.bookmarkListReducer.bookmarks,
+  followState: state.followReducer.isFollowing,
 });
 
-export default connect(mapStateToProps, { fetchProfile, bookmarkListing })(ProfileView);
+export default connect(mapStateToProps,
+  {
+    fetchProfile, bookmarkListing, followAction, unfollowAction,
+  })(ProfileView);

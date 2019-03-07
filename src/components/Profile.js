@@ -2,103 +2,110 @@
 /* eslint-disable react/no-unused-prop-types */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Tab, Tabs, TabList, TabPanel,
 } from 'react-tabs';
+import { Link } from 'react-router-dom';
 
 
 function editOwnProfile() {
-  window.location = 'profile/edit';
+  window.location = '/profile/edit';
 }
 
-function Profile(props) {
-  const {
-    first_name, last_name, bio, followers, following, username, image,
-  } = props.profile;
-  return (
+class Profile extends React.Component {
+  state = {
+    followers: this.props.profile.followers,
+  }
 
-    <div className="container wrapper">
-      <div className="profile-info mb-5">
-        <div className="">
-          <img
-            alt=""
-            src={
-              !image
-                ? 'https://res.cloudinary.com/soultech/image/upload/v1550685426/authors%20haven%20pics/avatar.png'
-                : image
-            }
-            className="rounded-circle dp"
-          />
+  onClick = () => {
+    if (this.props.is_following) {
+      this.setState(prevState => ({ followers: prevState.followers - 1 }));
+      this.props.onUnfollow();
+    } else {
+      this.props.onFollow();
+      this.setState(prevState => ({ followers: prevState.followers + 1 }));
+    }
+  }
+
+  render() {
+    const {
+      first_name, last_name, bio, following, username, image,
+    } = this.props.profile;
+    const buttonState = this.props.is_following ? 'Unfollow' : 'Follow';
+
+    return (
+      <div className="container wrapper">
+        <div className="profile-info mb-5">
+          <div className="">
+            <img
+              alt=""
+              src={
+                !image
+                  ? 'https://res.cloudinary.com/soultech/image/upload/v1550685426/authors%20haven%20pics/avatar.png'
+                  : image
+              }
+              className="rounded-circle dp"
+            />
+          </div>
+          <div className="profile-text">
+            <h1>
+              {!first_name ? (
+                <div>
+                  {' '}
+                  <h1 id="username">{username}</h1>
+                  {' '}
+                </div>
+              ) : first_name}
+              &nbsp;
+              {last_name}
+            </h1>
+            <div>
+              <h3 className="mt-3 float-left">
+                <Link to={`/profiles/${username}/followers`}>
+                  Followers:
+                  {' '}
+                  {this.state.followers}
+                </Link>
+                &nbsp;
+                <Link to={`/profiles/${username}/following`}>
+                  Following:
+                  {' '}
+                  {following}
+                </Link>
+              </h3>
+              <button type="button" className="btn btn-sm button-primary profile-follow shadow mt-3" onClick={this.onClick} hidden={this.props.isOwnProfile}>{buttonState}</button>
+            </div>
+            <p className="mt-4">
+              {bio}
+            </p>
+            <button type="button" className="btn btn-sm button-primary" onClick={editOwnProfile} hidden={!this.props.isOwnProfile}>Edit Profile</button>
+          </div>
         </div>
-        <div className="profile-text">
-          <h1>
-            {!first_name ? (
-              <div>
-                {' '}
-                <h1 id="username">{username}</h1>
-                {' '}
-              </div>
-            ) : first_name}
-&nbsp;
-            {last_name}
-          </h1>
-          <h3 className="mt-3">
-Followers:
-            {' '}
-            {followers}
-            &nbsp;
-Following:
-            {' '}
-            {following}
-          </h3>
-          <p className="mt-4">
-            {bio}
-          </p>
-          <button type="button" className="btn button-primary" onClick={editOwnProfile} hidden={!props.isOwnProfile}>Edit Profile</button>
+        <div className="tabs">
+          <Tabs>
+            <TabList>
+              <Tab>Bookmarked Articles</Tab>
+              <Tab>Favorite Articles</Tab>
+            </TabList>
+            <TabPanel>
+              <ul className="list-group">
+                {
+                  this.props.bookmarks.length > 0
+                    ? this.props.bookmarks.map(bookmark => (
+                      <li key={bookmark.slug} className="list-group-item"><a href={`article/${bookmark.slug}`}>{bookmark.title}</a></li>
+                    ))
+                    : <li className="list-group-item">You have no bookmarked articles</li>}
+              </ul>
+            </TabPanel>
+            <TabPanel>
+              Favorite Articles appear here.
+            </TabPanel>
+          </Tabs>
         </div>
       </div>
-      <div className="tabs">
-        <Tabs>
-          <TabList>
-            <Tab>Bookmarked Articles</Tab>
-            <Tab>Favorite Articles</Tab>
-          </TabList>
-          <TabPanel>
-            <ul className="list-group">
 
-              {
-                props.bookmarks.length > 0
-                  ? props.bookmarks.map(bookmark => (
-                    <li key={bookmark.slug} className="list-group-item"><a href={`article/${bookmark.slug}`}>{bookmark.title}</a></li>
-                  ))
-                  : <li className="list-group-item">You have no bookmarked articles</li>}
-            </ul>
-          </TabPanel>
-          <TabPanel>
-            Favorite Articles appear here.
-          </TabPanel>
-        </Tabs>
-      </div>
-    </div>
-
-  );
+    );
+  }
 }
-Profile.propTypes = {
-  first_name: PropTypes.string,
-  last_name: PropTypes.string,
-  bio: PropTypes.string,
-  followers: PropTypes.number,
-  following: PropTypes.number,
-  image: PropTypes.string,
 
-};
-Profile.defaultProps = {
-  first_name: '',
-  last_name: '',
-  bio: '',
-  followers: 0,
-  following: 0,
-  image: '',
-};
 export default Profile;

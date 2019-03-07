@@ -29,6 +29,7 @@ export class LoginView extends Component {
     const { isSuccessful } = this.props;
     return (
       <div>
+        <p className="text-center">Sign in with</p>
         <SocialAuthView />
         <Login onSubmit={this.handleSubmit} errors={errors} isSuccessful={isSuccessful} />
       </div>

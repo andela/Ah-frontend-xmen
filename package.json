@@ -4,7 +4,7 @@
   "description": "#### A Social platform for the creative at heart.",
   "main": "index.js",
   "engines": {
-    "node": "10.15.1"
+    "node": "11.10.1"
   },
   "scripts": {
     "test": "jest",
