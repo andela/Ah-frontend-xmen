@@ -101,6 +101,7 @@ describe('<CommentReplyView',() => {
     jest.runAllTimers();
     expect(props.createCommentReplyAction).toBeCalled()
   });
+
   it('should handleChange', () => {
     let wrapper = mount(<CommentReplyView {...props} />);
     const e = {
@@ -111,9 +112,19 @@ describe('<CommentReplyView',() => {
     wrapper.instance().handleChange(e)
     expect(wrapper.instance().state.reply_body).toEqual("change value")
   });
+  it('should open collapsible', () => {
+    let wrapper = mount(<CommentReplyView {...props} />);
+    const e = {
+      target:{
+        id: 1
+      }
+    }
+    wrapper.instance().handleOpen(e)
+    // expect(wrapper.instance().state.reply_body).toEqual("change value")
+  });
 
   it('should map state to props', () => {
     expect(mapStateToProps({})).toEqual({"authState": undefined, "commentReplyState": undefined})
-  })
+  });
 
 })
