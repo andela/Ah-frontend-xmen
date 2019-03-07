@@ -6,17 +6,15 @@
   "engines": {
     "node": "10.15.1"
   },
-
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": " jest --collectCoverage",
-    "start": "webpack-dev-server --open --mode development --hot --https",
-    "build": "webpack --mode production --open --hot",
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
     "lint": "eslint . --ignore-path .gitignore",
     "lint:fix": "eslint . --ignore-path .gitignore --fix",
-    "heroku-prebuild": "npm install yarn && yarn install ",
-    "heroku-postbuild": "yarn run build"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",
@@ -103,6 +101,7 @@
     "webpack-merge": "^4.1.3",
     "webpack-visualizer-plugin": "^0.1.11"
   },
+  "heroku-run-build-script": true,
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",

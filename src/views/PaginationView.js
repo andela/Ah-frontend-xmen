@@ -18,9 +18,12 @@ export class Paginations extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.count && nextProps.count > 1) {
       if (nextProps.count > 6) {
+        const extraPages = nextProps.count % 6;
+        const totalPages = (extraPages === 0) ? nextProps.count / 6 : (nextProps.count / 6) + 1;
+
         this.setState({
           allArticles: nextProps.count,
-          totalPages: nextProps.count / 6,
+          totalPages,
         });
       } else {
         this.setState({ allArticles: nextProps.count, totalPages: 1 });
@@ -47,6 +50,7 @@ export class Paginations extends Component {
     for (let i = 1; i <= totalPages; i += 1) {
       pageNumbers.push(i);
     }
+    console.log(pageNumbers);
     return (
       <Pagination
         pageNumbers={pageNumbers}
