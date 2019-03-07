@@ -8,6 +8,7 @@ export const getCommentReplies = (payload) => dispatch => {
     res=>res.json()
   ).then(
     data => {
+      console.log(data.replies)
       if (data.replies) {
         dispatch({
           type:ActionTypes.GET_COMMENT_REPLIES_SUCCESS,

@@ -16,6 +16,16 @@ export class CommentReplyView extends Component {
     id:""
   };
 
+
+  // componentDidMount(){
+  //   const comments = this.props.commentsState.comments;
+  //     comments.forEach(comment => {
+  //     this.props.getCommentReplies({
+  //       slug: this.props.match.params.slug,
+  //       commentId: comment.id
+  //     })
+  //   });
+  // }
   handleOpen = e => {
     const openState=this.state.open
     this.setState({
@@ -46,6 +56,7 @@ export class CommentReplyView extends Component {
   };
 
   handleFetch = () => {
+    
     this.props.getCommentReplies({
       slug: this.props.match.params.slug,
       commentId: this.props.commentId
@@ -89,6 +100,8 @@ export class CommentReplyView extends Component {
 
   render() {
     const replies = this.props.commentReplyState.payload;
+    
+    
     return (
       <div>
         <CommentReplyBanner getReplies={this.handleFetch}
@@ -117,7 +130,8 @@ export class CommentReplyView extends Component {
 export const mapStateToProps = state => {
   return{
     commentReplyState:state.commentReplies,
-    authState:state.Auth
+    authState:state.Auth,
+    commentsState:state.comments.payload
   }
 };
 

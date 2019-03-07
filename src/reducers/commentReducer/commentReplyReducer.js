@@ -13,6 +13,22 @@ const initialState = {
 const commentReplyReducer = (state=initialState, action) => {
   switch (action.type) {
     case (ActionTypes.GET_COMMENT_REPLIES_SUCCESS):
+      // console.log('===========>incoming', action.payload);
+      // console.log('=================> current',state.payload)
+      const incomingReplies= action.payload.map(incomingReply => {
+        
+        const currentReplies=state.payload.map(currentReply=>{
+          // console.log('............> currentReply',currentReply)
+          // console.log('-------> incoming',incomingReply)
+          if(incomingReply.id===currentReply.id){
+            console.log(incomingReply.id)
+            console.log(currentReply.id)
+          }
+        })
+      } )
+   
+      const allReplies=[...state.payload, ...action.payload]
+      console.log('=========> all', allReplies)
       return{
         ...state,
         isSuccessful: true,

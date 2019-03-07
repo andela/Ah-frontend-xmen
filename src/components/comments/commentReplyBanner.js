@@ -4,10 +4,11 @@ import CommentInput from '../../components/comments/commentInput';
 import parseDate from  '../../utils/neededFiles';
 
 const commentReplyBanner = props => {
+
   const replies=props.replyList.map(reply => {
     if(props.commentId === reply.comment){
       return(
-        <div key={reply.id} className="row mb-2 mt-2 container comments">
+        <div className="row mb-2 mt-2 container comments">
           <div className="col-md-2">
             <img
               className="shadow img-fluid"
