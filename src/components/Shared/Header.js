@@ -19,7 +19,7 @@ export class Header extends Component {
 
   componentWillMount = () => {
     this.props.getAuthUserDetails();
-    openLoginModal: false,
+    // openLoginModal: false,
   };
   
   componentWillMount = () => {
