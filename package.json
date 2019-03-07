@@ -14,7 +14,7 @@
     "build": "webpack --mode production --open --hot",
     "lint": "eslint . --ignore-path .gitignore",
     "lint:fix": "eslint . --ignore-path .gitignore --fix",
-    "heroku-prebuild": "npm install && yarn install ",
+    "heroku-prebuild": "yarn install ",
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
