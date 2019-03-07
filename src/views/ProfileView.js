@@ -16,7 +16,7 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchProfile(this.props.match.params.username);
+    this.props.getProfiles(this.props.match.params.username);
     const { bookmarkListing } = this.props;
     bookmarkListing();
   }
@@ -83,7 +83,18 @@ const mapStateToProps = state => ({
   followState: state.followReducer.isFollowing,
 });
 
-export default connect(mapStateToProps,
-  {
-    fetchProfile, bookmarkListing, followAction, unfollowAction,
-  })(ProfileView);
+const mapDispatchToProps = dispatch => ({
+  getProfiles: (username) => {
+    dispatch(fetchProfile(username));
+  },
+  bookmarkListing,
+  followAction: (username) => {
+    dispatch(followAction(username));
+  },
+  unfollowAction: (username) => {
+    dispatch(unfollowAction(username));
+  },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);

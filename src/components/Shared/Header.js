@@ -1,29 +1,32 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RegisterModal from '../auth/RegisterModal';
 import LoginModal from '../Login/loginModal';
 import getAuthUserDetails from '../../actions/authAction';
+
+import notificationsAction from '../../actions/notificationsAction';
+import NotificationsDropdownMenu, { UserDropdownMenu } from './notifications';
+
 
 export class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      active: '',
+      notificationMenuActive: '',
+      userMenuActive: '',
       isShowing: false,
     };
   }
 
   componentWillMount = () => {
     this.props.getAuthUserDetails();
+    this.props.getNotifications(false);
     // openLoginModal: false,
-  };
-  
-  componentWillMount = () => {
-    this.props.getAuthUserDetails();
   };
 
   onOpenLoginModal = () => {
@@ -48,6 +51,7 @@ export class Header extends Component {
     return <Redirect to="/" />;
   };
 
+
   logOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('slug');
@@ -56,50 +60,59 @@ export class Header extends Component {
     window.location = '/';
   };
 
-  handleDropdown = () => {
+  markAsRead = (actionLink) => {
+    this.props.markAsRead(true);
+    this.setState({
+      notificationMenuActive: '',
+      userMenuActive: '',
+      isShowing: false,
+    });
+    this.props.history.push(actionLink);
+  }
+
+  handleNotificationDropdown = () => {
     if (this.state.isShowing === false) {
       this.setState({
-        active: 'active',
+        notificationMenuActive: 'active',
+        userMenuActive: '',
         isShowing: true,
       });
     } else {
       this.setState({
-        active: '',
+        notificationMenuActive: '',
+        userMenuActive: '',
         isShowing: false,
       });
     }
   };
 
-  logOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('slug');
-    localStorage.removeItem('username');
-    localStorage.removeItem('users');
-    window.location = '/';
-  };
-
   handleDropdown = () => {
     if (this.state.isShowing === false) {
       this.setState({
-        active: 'active',
+        userMenuActive: 'active',
+        notificationMenuActive: '',
         isShowing: true,
       });
     } else {
       this.setState({
-        active: '',
+        userMenuActive: '',
+        notificationMenuActive: '',
         isShowing: false,
       });
     }
   };
 
   render() {
+    // const { open } = this.state;
+    const bellClassName = this.props.hasUnread ? 'fas' : 'far';
     const userLinks = (
+
       <div className="material-dropdown">
+        <i id="nd-click" onClick={this.handleNotificationDropdown} className={`${bellClassName} fa-bell fa-lg float-left `} />
         <div
           id="dd-click"
           className="dd-click"
           onClick={this.handleDropdown}
-          onKeyPress=""
           role="button"
           tabIndex="0"
         >
@@ -115,23 +128,26 @@ export class Header extends Component {
             alt=""
           />
         </div>
-        <ul className={`dropdown ${this.state.active}`}>
-          <li><a href="/editor">Create an Article</a></li>
-          <li><a href="/profile">My Profile</a></li>
-          <li>
-            <a
-              id="logout"
-              onClick={this.logOut}
-              onKeyPress=""
-              role="button"
-              tabIndex="0"
-            >
-            Log out
-            </a>
-          </li>
-        </ul>
+        {
+          this.state.notificationMenuActive
+            ? (
+              <NotificationsDropdownMenu
+                markAsRead={this.markAsRead}
+                notifications={this.props.Notifications}
+                active={this.state.notificationMenuActive}
+              />
+            )
+            : (
+              <UserDropdownMenu
+                active={this.state.userMenuActive}
+                logOut={this.logOut}
+              />
+            )
+        }
+
       </div>
     );
+
 
     const guestLinks = (
       <button
@@ -149,12 +165,12 @@ export class Header extends Component {
       <div>
         <nav className="navbar navbar-expand-lg shadow navbar-dark">
           <div className="container">
-            <a href="/" className="float-left">
+            <Link to="/" className="float-left">
               <img
                 src="https://res.cloudinary.com/soultech/image/upload/v1550685433/authors%20haven%20pics/logo4authorsHaven1.png"
                 alt=""
               />
-            </a>
+            </Link>
             <div className="float-right">
               {this.props.auth.IsAuth ? userLinks : guestLinks}
             </div>
@@ -175,13 +191,19 @@ export class Header extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     auth: state.Auth,
+    Notifications: state.notificationsReducer.notifications,
+    hasUnread: state.notificationsReducer.hasUnread,
   };
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  { getAuthUserDetails },
-)(Header);
+  {
+    getAuthUserDetails,
+    getNotifications: notificationsAction,
+    markAsRead: notificationsAction,
+  },
+)(Header));

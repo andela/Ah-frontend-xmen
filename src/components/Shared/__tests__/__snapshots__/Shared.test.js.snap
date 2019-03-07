@@ -3,3 +3,5 @@
 exports[`Shared Components should render Footer without crushing 1`] = `ShallowWrapper {}`;
 
 exports[`Shared Components should render Header without crushing 1`] = `ShallowWrapper {}`;
+
+exports[`Shared Components should render Header without crushing 2`] = `ShallowWrapper {}`;

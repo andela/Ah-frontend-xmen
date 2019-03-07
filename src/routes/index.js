@@ -12,6 +12,7 @@ import EditArticleView from '../views/articleEditorView/EditArticleView';
 import CreateArticleView from '../views/articleEditorView/CreateArticleView';
 import ProfileListView from '../views/ProfileListView';
 
+import NotificationListView from '../views/NotificaionListView';
 
 const Routes = () => (
   <Router>
@@ -25,6 +26,7 @@ const Routes = () => (
       <Route path="/profile/edit" exact strict component={UpdateView} />
       <Route path="/article/:slug" exact strict component={ArticleReadView} />
       <Route path="/article/:slug/report" exact strict component={ReportArticleView} />
+      <Route path="/notifications" exact strict component={NotificationListView} />
       <Route path="/editor" exact strict component={CreateArticleView} />
       <Route path="/editor/:slug" exact strict component={EditArticleView} />
       <Route path="/profiles/:username/following" exact strict component={ProfileListView} />

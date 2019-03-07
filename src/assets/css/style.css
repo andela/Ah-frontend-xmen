@@ -54,7 +54,7 @@ textarea {
 #report{
   color: red;
 }
-#report:hover, #bookmark:hover{
+#report:hover, #bookmark:hover, #nd-click, #dd-click{ 
   cursor: pointer;
 }
 /* .tabs{
@@ -214,6 +214,55 @@ textarea {
   
 }
 
+/* notification dropdown */
+
+.list-group-item{
+  z-index: -1 !important ;
+}
+
+.note-dropdown {
+  /* width: 100%;  */
+  z-index: 1000 !important;
+  background: #ffffff;
+  text-align: center;
+  transition: all 0.25s ease-out;
+  transform: scale(0);
+  transform-origin: 100% 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.note-dropdown li {
+  display: block;
+  width: 100%;
+}
+
+.note-dropdown button {
+  display: block;
+  width: 100%;
+}
+
+.note-dropdown li a {
+  width: 100%;
+  padding: 1em 18px;
+  display: inline-block;
+  white-space: pre;
+  box-sizing: border-box;
+}
+
+.note-dropdown li a:hover { 
+    background-color: #6457dd;
+    color: white !important;
+}
+
+.note-dropdown.active {
+  transform: scale(1);
+  transition: all 0.25s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  
+}
+
+
+
+
 .material-dropdown{
     height: 0px;
     float: left;
@@ -254,3 +303,25 @@ textarea {
 {
     padding-top: 50px !important;
 }
+.notification-item{
+  text-align: justify;
+  /* align-content: flexx-start; */
+  font-size: 0.8em;
+  word-wrap: break-word;
+}
+
+.notification-unread{
+  background-color:#f2f2f2;
+}
+
+.bell{
+  font-family: sans-serif  'FontAwesome'!important;;
+}
+
+.fa-bell{
+  margin-left: -37px;
+  margin-top: 13px;
+  position: absolute;
+
+}
+
