@@ -12,9 +12,17 @@ export class CommentReplyView extends Component {
   state = {
     reply_body:"",
     updateBody:"",
+    open:false,
+    id:""
   };
 
-
+  handleOpen = e => {
+    const openState=this.state.open
+    this.setState({
+      open: !openState,
+      id:e.target.id
+    });
+  }
   handleChange = e => {
    this.setState({
      reply_body: e.target.value
@@ -96,6 +104,9 @@ export class CommentReplyView extends Component {
                             deleteReply={this.handleDelete}
                             updateSubmit={this.handleUpdateSubmit}
                             handleUpdateChange={this.handleUpdateChange}
+                            open={this.state.open}
+                            handleOpen={this.handleOpen}
+                            collapsibleID={this.state.id}
           />
           <ToastContainer/>
       </div>

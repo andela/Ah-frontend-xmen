@@ -10,7 +10,7 @@ const initialState = {
   errors:""
 }
 
-const commentReplyReducer =(state=initialState,action) => {
+const commentReplyReducer = (state=initialState, action) => {
   switch (action.type) {
     case (ActionTypes.GET_COMMENT_REPLIES_SUCCESS):
       return{

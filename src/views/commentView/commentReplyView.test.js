@@ -95,7 +95,7 @@ describe('<CommentReplyView',() => {
   it('should call createCommentReplyAction', () => {
     let wrapper = mount(<CommentReplyView {...props} />);
     const e ={
-      preventDefault:()=>{}
+      preventDefault: () => {}
     }
     wrapper.instance().handleSubmit(e)
     jest.runAllTimers();
