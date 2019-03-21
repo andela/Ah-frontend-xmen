@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 
 const socialAuthButtons = props => (
-  <div id="social-button" className="text-center pt-5">
+  <div id="social-button" className="text-center pt-2">
 
     <FacebookLogin
       appId={process.env.appId}
       fields="name,email,picture"
       callback={props.responseFacebook}
-      cssClass="btn btn-primary mr-2 facebook-btn"
-      textButton={<i className="fab fa-2x fa-facebook-f" />}
+      cssClass=" mr-2 facebook-btn bg-primary"
+      textButton={<i className="fab fa-facebook-f " />}
       icon={false}
     />
 
@@ -21,8 +21,8 @@ const socialAuthButtons = props => (
       onSuccess={props.googleResponseSuccess}
       onFailure={props.googleResponseFailure}
       icon={false}
-      className="google-btn btn btn-primary"
-      buttonText={<i className="fab fa-2x fa-google" />}
+      className="google-btn"
+      buttonText={<img alt="" src="https://cdn.freebiesupply.com/logos/large/2x/google-icon-logo-png-transparent.png" />}
     />
 
 

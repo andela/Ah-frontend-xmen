@@ -14,6 +14,9 @@ export class Banner extends Component {
   onModalOpen = (event) => {
     event.preventDefault();
     this.setState({ open: true });
+    if (this.state.openLoginModal) {
+      this.setState({ openLoginModal: false });
+    }
   }
 
   onModalClose = (event) => {
@@ -24,6 +27,9 @@ export class Banner extends Component {
 
 onOpenLoginModal = () => {
   this.setState({ openLoginModal: true });
+  if (this.state.open) {
+    this.setState({ open: false });
+  }
 };
 
 onCloseLoginModal = () => {
@@ -45,7 +51,11 @@ render() {
           <div className="mt-4 p-0 float-left">
             <button type="submit" id="modalLauncher" onClick={this.onModalOpen} className="btn button-primary mr-3">Get Started</button>
             <button type="button" onClick={this.onOpenLoginModal} className="btn ml-2 login-banner">Login</button>
-            <LoginModal open={openLoginModal} onClose={this.onCloseLoginModal} />
+            <LoginModal
+              open={openLoginModal}
+              onOpenSignup={this.onModalOpen}
+              onClose={this.onCloseLoginModal}
+            />
           </div>
         </div>
       </div>
@@ -68,13 +78,18 @@ render() {
   return (
     <div>
       {this.props.auth.IsAuth ? userBanner : guestBanner}
-      <RegisterModal open={open} onModalClose={this.onModalClose} />
+      <RegisterModal
+        open={open}
+        onModalClose={this.onModalClose}
+        onLoginTrigger={this.onOpenLoginModal}
+
+      />
     </div>
   );
 }
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     auth: state.Auth,
   };

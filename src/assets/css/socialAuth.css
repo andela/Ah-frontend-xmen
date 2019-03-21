@@ -1,14 +1,30 @@
-.google-btn{
-    background:#f5365c !important;
-    color: white !important;
-    display: inline-block !important;
-    border-radius: 60px !important; 
-    padding: 1.3em 0.6em !important;
+#social-button{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
-
-.facebook-btn{
-    color: white !important;
+.google-btn{
     display: inline-block !important;
-    border-radius: 60px !important; 
-    padding: 1.3em 1.8em !important;   
+    border-radius: 70px !important;
+    border: #31b342 5px;
+    padding: .5rem !important;
+    width: 25%;
+}
+.google-btn span {
+    padding: 0px !important;
+    border-radius: 60px !important;
+
+}
+.google-btn span img {
+    width: 32px;
+}
+.facebook-btn{
+    float: right;
+    color: white !important;
+    border-radius: 70px !important;
+    padding: .6em !important;
+    width: 25%;
+}
+.fa-facebook-f{
+    font-size: 28px;
 }

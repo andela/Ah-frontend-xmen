@@ -2,6 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable consistent-return */
+
 import React, { Component } from 'react';
 import paginate from '../../utils/paginator';
 

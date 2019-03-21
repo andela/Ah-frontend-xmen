@@ -20,7 +20,6 @@ function parseDate(dateString) {
 
 function parseName(author) {
   if (author.first_name === undefined) return author.username;
-
   return `${author.first_name} ${author.last_name}`;
 }
 
@@ -30,7 +29,7 @@ function parseAvatar(image) {
 }
 
 function parseImage(image) {
-  if (image !== null) return (<img className="img-respoonsive w-100 mb-5" src={image} alt="article" />);
+  if (image !== null) return (<img className="img-respoonsive w-100 mb-5 shadow" src={image} alt="article" />);
   return undefined;
 }
 
@@ -74,36 +73,10 @@ const ArticleComponent = (props) => {
               {props.article.read_time}
             </p>
           </div>
-
         </Link>
-        <div className="mb-4">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <EditButton
-                    onClick={props.onClick}
-                    slug={props.slug}
-                    username={props.article.author.username}
-                  />
-
-                </td>
-                <td>
-                  <DeleteButton
-                    onClick={props.onClick}
-                    slug={props.slug}
-                    username={props.article.author.username}
-                  />
-
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="img-respoonsive w-100">
+        <div className="img-responsive w-100">
           {parseImage(props.article.image)}
         </div>
-
         <div className="text-justify mb-5">
           {Parser(String(props.article.body))}
         </div>
@@ -115,17 +88,59 @@ const ArticleComponent = (props) => {
               dislikesCount={props.dislikes_count}
               isLikeBtn={false}
             />
+
             {starRatings}
+
+            <table className="float-right mt-1 ml-1">
+              <tbody>
+                <tr>
+                  <td>
+                    <EditButton
+                      onClick={props.onClick}
+                      slug={props.slug}
+                      username={props.article.author.username}
+                    />
+                  </td>
+                  <td>
+                    <DeleteButton
+                      onClick={props.onClick}
+                      slug={props.slug}
+                      username={props.article.author.username}
+                    />
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
           <div className="float-right">
-            <span data-tip="Bookmark for later" id="bookmark" onClick={props.onBookmark} className={props.isLoggedin ? 'text-default' : 'hidden text-muted'}><span className="m-2"><i className={props.isBookmarked ? 'fas fa-bookmark fa-lg text-default' : 'far fa-bookmark fa-lg'} /></span></span>
-            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.fbshare}><span className="m-2"><i className="fab fa-facebook-square  fa-lg" /></span></a>
-            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
-            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
-            <a rel="noopener noreferrer" target="_blank" href={props.article.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
-            <span className="m-2">
-              <i className="fas fa-flag" id="report" onClick={props.onClick} />
+            <span
+              data-tip="Bookmark for later"
+              id="bookmark"
+              onClick={props.onBookmark}
+              onKeyPress=""
+              role="button"
+              tabIndex="0"
+              className={props.isLoggedin ? 'text-default' : 'hidden text-muted'}
+            >
+              <span className="m-2">
+                <i className={props.isBookmarked ? 'fas fa-bookmark fa-lg text-default' : 'far fa-bookmark fa-lg'} />
+              </span>
+            </span>
+            <a data-tip="Share on FB" rel="noopener noreferrer" target="_blank" href={props.article.share_links.fbshare}><span className="m-2"><i className="fab fa-facebook-square  fa-lg" /></span></a>
+            <a data-tip="Share on twitter" rel="noopener noreferrer" target="_blank" href={props.article.share_links.twshare}><span className="m-2"><i className="fab fa-twitter-square  fa-lg" /></span></a>
+            <a data-tip="Share on Google+" rel="noopener noreferrer" target="_blank" href={props.article.share_links.gpshare}><span className="m-2"><i className="fab fa-google-plus-square  fa-lg" /></span></a>
+            <a data-tip="Share on email" rel="noopener noreferrer" target="_blank" href={props.article.share_links.mailshare}><span className="m-2"><i className="fas fa-envelope-square  fa-lg" /></span></a>
+            <span data-tip="Report this article" className="m-2">
+              <i
+                className="fas fa-flag"
+                id="report"
+                onClick={props.onClick}
+                onKeyPress=""
+                role="button"
+                tabIndex="0"
+              />
             </span>
 
           </div>
@@ -133,9 +148,7 @@ const ArticleComponent = (props) => {
         </div>
       </div>
     </div>
-
   );
 };
-
 
 export default ArticleComponent;

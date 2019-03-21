@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -11,6 +13,7 @@ export class CommentView extends Component {
     state={
       body: '',
       open: false,
+      id: '',
 
     }
 
@@ -27,8 +30,20 @@ export class CommentView extends Component {
         setTimeout(() => {
           window.location.reload();
         }, 900);
+      } else if (nextProps.commentsState.createCommentSuccess) {
+        this.setState({
+          body: '',
+        });
       }
     }
+
+  handleOpen = (e) => {
+    const openState = this.state.open;
+    this.setState({
+      open: !openState,
+      id: e.target.id,
+    });
+  }
 
     handleUpdateSubmit=(e) => {
       e.preventDefault();
@@ -93,6 +108,7 @@ export class CommentView extends Component {
             AuthUserImage={this.props.authState.image}
             user={this.props.authState.username}
             authenticted={this.props.authState.IsAuth}
+            value={this.state.body}
 
           />
 
@@ -106,6 +122,8 @@ export class CommentView extends Component {
                 handleUpdateSubmit={this.handleUpdateSubmit}
                 handleUpdate={this.handleUpdateChange}
                 open={this.state.open}
+                handleOpen={this.handleOpen}
+                collapsibleID={this.state.id}
               />
             )
             }

@@ -8,7 +8,6 @@ const token = localStorage.getItem('token');
 const getCommentsAction = payload => dispatch => fetch(`${BASE_URL}/articles/${payload.articleSlug}/comments/`, {
   method: 'GET',
   headers: {
-    // Authorization: `Bearer ${token}`,
   },
 }).then(res => res.json()).then((data) => {
   if (data.comments) {
