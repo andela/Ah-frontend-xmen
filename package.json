@@ -6,7 +6,6 @@
   "engines": {
     "node": "10.15.1"
   },
-
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -15,7 +14,6 @@
     "build": "webpack --mode production",
     "lint": "eslint . --ignore-path .gitignore",
     "lint:fix": "eslint . --ignore-path .gitignore --fix",
-    "heroku-prebuild": "npm install yarn && yarn install",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
