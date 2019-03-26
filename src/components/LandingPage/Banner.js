@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import RegisterModal from '../auth/RegisterModal';
 import LoginModal from '../Login/loginModal';
 import getAuthUserDetails from '../../actions/authAction';
+import TagListView from '../../views/TagsView';
 
 export class Banner extends Component {
   state = {
     open: false,
     openLoginModal: false,
   }
+
 
   onModalOpen = (event) => {
     event.preventDefault();
@@ -78,6 +80,7 @@ render() {
   return (
     <div>
       {this.props.auth.IsAuth ? userBanner : guestBanner}
+      <TagListView />
       <RegisterModal
         open={open}
         onModalClose={this.onModalClose}

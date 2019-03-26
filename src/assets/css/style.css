@@ -224,3 +224,33 @@ textarea {
   outline: none;
 }
 
+.article-tags{
+  margin: 0 auto;
+}
+
+.badge{
+  border-radius: 7 !important;
+  background-color: #e3e3e3;
+  font-size: 13px !important;
+  padding: 7px 15px !important;
+  cursor: pointer;
+}
+
+.badge:hover{
+  background-color: #6457dd !important;
+  color: #ffffff !important;
+}
+
+.fa-caret-left, .fa-caret-right{
+  outline: none;
+  cursor: pointer;
+}
+
+.fa-caret-left:hover, .fa-caret-right:hover{
+  color: #afbde7;
+}
+
+.section-lg
+{
+    padding-top: 50px !important;
+}

@@ -12,6 +12,8 @@ import DislikeButtonView from '../../views/Buttons/DislikeButtonView';
 import EditButton from '../../views/articleEditorView/EditArticleButton';
 import DeleteButton from '../../views/articleEditorView/DeleteArticleButton';
 
+const uuidv4 = require('uuid/v4');
+
 function parseDate(dateString) {
   const date = new Date(dateString);
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -48,7 +50,7 @@ const ArticleComponent = (props) => {
     starRatings = (
       <span className=" text-muted">
         {' '}
-        {props.average_rating}
+        {props.article.average_rating}
         {' '}
         <i className="fa fa-star" style={{ color: '#FFD700' }} aria-hidden="true" />
       </span>
@@ -79,6 +81,11 @@ const ArticleComponent = (props) => {
         </div>
         <div className="text-justify mb-5">
           {Parser(String(props.article.body))}
+        </div>
+        <div>
+          <ul className="list-inline">
+            {props.article.tags.map(tag => <li key={uuidv4()} className="list-inline-item badge mb-4">{tag}</li>)}
+          </ul>
         </div>
         <div>
           <div className="float-left">
