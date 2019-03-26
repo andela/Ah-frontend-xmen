@@ -6,7 +6,7 @@ import { ProfileView } from '../src/views/ProfileView';
 describe('profile view', () => {
   it('should render with loading', () => {
     const props = {
-      fetchProfile: jest.fn(),
+      getProfiles: jest.fn(),
       bookmarkListing: jest.fn(),
       loading: 'loading',
       match: { params: {} },
@@ -24,7 +24,7 @@ describe('profile view', () => {
 
   it('should render with errors', () => {
     const props = {
-      fetchProfile: jest.fn(),
+      getProfiles: jest.fn(),
       bookmarkListing: jest.fn(),
       error: 'error',
       match: { params: {} },
@@ -42,8 +42,8 @@ describe('profile view', () => {
 
   it('should render without crashing', () => {
     const props = {
-      fetchProfile: jest.fn(),
       match: { params: {} },
+      getProfiles: jest.fn(),
       bookmarkListing: jest.fn(),
     }; const wrapper = shallow(<ProfileView {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -52,7 +52,7 @@ describe('profile view', () => {
   it('should handle follow', () => {
     const props = {
       followState: true,
-      fetchProfile: jest.fn(),
+      getProfiles: jest.fn(),
       is_following: false,
       followAction: jest.fn(),
       bookmarkListing: jest.fn(),
@@ -85,7 +85,7 @@ describe('profile view', () => {
 
   it('should handle unfollow', () => {
     const props = {
-      fetchProfile: jest.fn(),
+      getProfiles: jest.fn(),
       is_following: false,
       unfollowAction: jest.fn(),
       bookmarkListing: jest.fn(),
