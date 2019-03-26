@@ -8,14 +8,13 @@ const CommentBanner = (props) => {
       <div className="comments-header row">
         <div className="col-md-1 col-sm-2">
           <img
-            className="shadow img-fluid"
+            className="comment-img rounded-circle float-left mr-3 avatar shadow img-fluid"
             src={
               !comment.author.image ? 'https://res.cloudinary.com/soultech/image/upload/v1550685426/authors%20haven%20pics/avatar.png' : comment.author.image
             }
             width=""
-            alt="Profile Avatar"
-            title="Jack Smith"
-            className="img-fluid comment-img rounded-circle float-left mr-3 avatar "
+            alt={comment.author.username}
+            title={comment.author.username}
           />
         </div>
         <div className="col-md-10">
@@ -25,11 +24,25 @@ const CommentBanner = (props) => {
         <div className="col-md-1">
           { props.user === comment.author.username
             ? (
-              <i
-                id={comment.id}
-                onClick={props.deleteComment}
-                className="fas fa-trash-alt "
-              />
+              <div className="row">
+                <i
+                  id={comment.id}
+                  onClick={props.deleteComment}
+                  className="fas fa-trash-alt col-md-6 "
+                  onKeyPress=""
+                  role="button"
+                  tabIndex="0"
+                />
+                <i
+                  className="fas fa-pen col-md-6"
+                  id={comment.id}
+                  onClick={props.handleOpen}
+                  onKeyPress=""
+                  role="button"
+                  tabIndex="0"
+                />
+              </div>
+
             )
             : null
         }
@@ -44,27 +57,22 @@ const CommentBanner = (props) => {
       </div>
       { props.user === comment.author.username
         ? (
-
-          <div className="">
-            <Collapsible open={props.open} className="the-collapse" trigger={<i className="fas fa-edit" id={comment.id} />}>
-              <form id={comment.id} onSubmit={props.handleUpdateSubmit}>
-                <textarea
-                  className="form-control mb-3 mt-2"
-                  rows="5"
-                  className="form-control"
-                  placeholder="Leave a comment"
-                  aria-label="With textarea"
-                  type="text"
-                  name="body"
-                  defaultValue={comment.body}
-                  onChange={props.handleUpdate}
-                  required
-                />
-                <button className="btn btn-outline-primary mt-2">Update</button>
-              </form>
-
-            </Collapsible>
-          </div>
+          <Collapsible open={comment.id === parseInt(props.collapsibleID) ? props.open : false} id={props.collapsibleID} className="the-collapse">
+            <form id={comment.id} onSubmit={props.handleUpdateSubmit}>
+              <textarea
+                className="form-control mb-3 mt-2"
+                rows="5"
+                placeholder="Leave a comment"
+                aria-label="With textarea"
+                type="text"
+                name="body"
+                defaultValue={comment.body}
+                onChange={props.handleUpdate}
+                required
+              />
+              <button className="btn btn-outline-primary mt-2">Update</button>
+            </form>
+          </Collapsible>
 
         )
         : null}

@@ -43,6 +43,7 @@ export class DeleteButton extends Component {
             tabIndex="0"
             onKeyPress={() => {}}
             hidden={!hideButton}
+            data-tip="Delete the Article"
           />
         </div>
       );

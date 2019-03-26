@@ -95,4 +95,27 @@ describe('<CommentView/>', () => {
     wrapper.instance().handleChange(e);
     expect(wrapper.state().body).toEqual(undefined);
   });
+  it('should reset state after successfully creation of a comment', () => {
+    wrapper.setProps({
+      commentsState: {
+        payload: {
+          comments: [],
+        },
+        createCommentSuccess: true,
+      },
+    });
+    expect(wrapper.instance().state.body).toEqual('');
+  });
+  it('should open collapsiable', () => {
+    wrapper.state({
+      open: false,
+    });
+    const e = {
+      target: {
+        id: 1,
+      },
+    };
+    wrapper.instance().handleOpen(e);
+    expect(wrapper.instance().state.open).toEqual(true);
+  });
 });

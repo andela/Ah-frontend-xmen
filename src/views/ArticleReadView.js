@@ -1,6 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable class-methods-use-this */
 import React from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+import ReactTooltip from 'react-tooltip';
 import ArticlComponent from '../components/Articles/ArticleComponent';
 import getSingleArticle from '../actions/articleActions/getSingleArticle';
 import CommentView from './commentView/commentView';
@@ -54,7 +58,7 @@ export class ArticleReadView extends React.Component {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
+
   handleFlag() {
     const token = localStorage.getItem('token');
     const slug = localStorage.getItem('slug');
@@ -109,6 +113,7 @@ export class ArticleReadView extends React.Component {
         />
         <CommentView />
         <ToastContainer />
+        <ReactTooltip />
       </div>
     );
   }

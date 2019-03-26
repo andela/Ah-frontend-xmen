@@ -5,12 +5,18 @@ import Login from '../../components/Login/loginForm';
 import loginAction from '../../actions/loginActions/loginAction';
 import SocialAuthView from '../socialAuthView/socialAuthView';
 
+const jwt = require('jsonwebtoken');
 
 export class LoginView extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.token) {
       localStorage.setItem('token', nextProps.token);
-      setTimeout(() => window.location.reload('/'), 500);
+      const decoded = jwt.decode(nextProps.token);
+      if (decoded) {
+        const username = decoded.user_data.split(' ')[1];
+        localStorage.setItem('username', username);
+      }
+      setTimeout(() => window.location.reload('/'), 100);
     }
   }
 
@@ -24,14 +30,23 @@ export class LoginView extends Component {
     loginAction(credentials);
   };
 
+  openSignup = (e) => {
+    this.props.onOpenSignup(e);
+  }
+
   render() {
     const { errors } = this.props;
     const { isSuccessful } = this.props;
     return (
       <div>
-        <p className="text-center">Sign in with</p>
+        <h3 className="text-center text-primary mt-4">Sign in with</h3>
         <SocialAuthView />
-        <Login onSubmit={this.handleSubmit} errors={errors} isSuccessful={isSuccessful} />
+        <Login
+          onSubmit={this.handleSubmit}
+          errors={errors}
+          isSuccessful={isSuccessful}
+          onOpenSignup={this.openSignup}
+        />
       </div>
     );
   }
@@ -52,6 +67,7 @@ LoginView.propTypes = {
   }),
 
 };
+
 LoginView.defaultProps = {
   token: '',
   errors: {},

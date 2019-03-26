@@ -12,7 +12,7 @@ export class EditButton extends Component {
       const loggedUser = decoded.user_data.split(' ')[1];
       const hideButton = loggedUser === this.props.username;
       return (
-        <div className="mr-3">
+        <div className="mr-2">
           <Link to={`/editor/${this.props.slug}`}>
             <i
               className="fas fa-pen"
@@ -21,6 +21,7 @@ export class EditButton extends Component {
               role="button"
               tabIndex="0"
               onKeyPress={() => {}}
+              data-tip="Edit the Article"
             />
           </Link>
         </div>

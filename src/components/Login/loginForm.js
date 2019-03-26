@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -10,7 +12,6 @@ const Login = (props) => {
   const passwordError = errors ? errors.password : '';
   const generalError = errors ? errors.error : '';
   const successMessage = isSuccessful ? 'Successfully logged in.' : '';
-
 
   return (
     <div className="card text-center mx-auto mt-4 border-0" id="loginCard">
@@ -40,13 +41,17 @@ const Login = (props) => {
               <input name="password" className="form-control" placeholder="Password" type="password" />
             </div>
           </div>
+          <Link to="/password-reset"><p className="text-primary float-right">Forgot Password?</p></Link>
           <div>
             <p className="text-danger">{passwordError}</p>
           </div>
           <div>
             <button type="submit" className="btn btn-block button-primary my-4">Sign in</button>
           </div>
-          <Link to="/password-reset"><p className="text-muted">Forgot Password?</p></Link>
+          <p>
+            Don&#39;t have an account?&nbsp;
+            <a href="#" onClick={props.onOpenSignup}>Sign up</a>
+          </p>
           <div>
             <p className="text-danger">{generalError}</p>
             <p className="text-success">{successMessage}</p>

@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RegisterModal from '../auth/RegisterModal';
+import LoginModal from '../Login/loginModal';
 import getAuthUserDetails from '../../actions/authAction';
 
 export class Header extends Component {
@@ -18,18 +19,56 @@ export class Header extends Component {
 
   componentWillMount = () => {
     this.props.getAuthUserDetails();
-  }
+    // openLoginModal: false,
+  };
+  
+  componentWillMount = () => {
+    this.props.getAuthUserDetails();
+  };
+
+  onOpenLoginModal = () => {
+    this.setState({ openLoginModal: true });
+    if (this.state.open) {
+      this.setState({ open: false });
+    }
+  };
+
+  onCloseLoginModal = () => {
+    this.setState({ openLoginModal: false });
+  };
 
   onModalOpen = (event) => {
     event.preventDefault();
     this.setState({ open: true });
-  }
+  };
 
   onModalClose = (event) => {
     event.preventDefault();
     this.setState({ open: false });
     return <Redirect to="/" />;
-  }
+  };
+
+  logOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('slug');
+    localStorage.removeItem('username');
+    localStorage.removeItem('users');
+    window.location = '/';
+  };
+
+  handleDropdown = () => {
+    if (this.state.isShowing === false) {
+      this.setState({
+        active: 'active',
+        isShowing: true,
+      });
+    } else {
+      this.setState({
+        active: '',
+        isShowing: false,
+      });
+    }
+  };
 
   logOut = () => {
     localStorage.removeItem('token');
@@ -54,8 +93,6 @@ export class Header extends Component {
   };
 
   render() {
-    const { open } = this.state;
-
     const userLinks = (
       <div className="material-dropdown">
         <div
@@ -66,21 +103,15 @@ export class Header extends Component {
           role="button"
           tabIndex="0"
         >
-          <i
-            className="fas fa-sort-down float-right mt-2"
-          />
-          <p
-            className="mt-2 float-right mr-2"
-          >
-            {this.props.auth.username}
-          </p>
+          <i className="fas fa-sort-down float-right mt-2" />
+          <p className="mt-2 float-right mr-2">{this.props.auth.username}</p>
           <img
             src={
               !this.props.auth.image
                 ? 'https://res.cloudinary.com/soultech/image/upload/v1550685426/authors%20haven%20pics/avatar.png'
                 : this.props.auth.image
             }
-            className="img-profile float-right mr-2"
+            className="img-profile float-right mr-2 shadow"
             alt=""
           />
         </div>
@@ -113,6 +144,7 @@ export class Header extends Component {
       </button>
     );
 
+    const { open, openLoginModal } = this.state;
     return (
       <div>
         <nav className="navbar navbar-expand-lg shadow navbar-dark">
@@ -128,7 +160,16 @@ export class Header extends Component {
             </div>
           </div>
         </nav>
-        <RegisterModal open={open} onModalClose={this.onModalClose} />
+        <LoginModal
+          open={openLoginModal}
+          onClose={this.onCloseLoginModal}
+          onOpenSignup={this.onModalOpen}
+        />
+        <RegisterModal
+          open={open}
+          onModalClose={this.onModalClose}
+          onLoginTrigger={this.onOpenLoginModal}
+        />
       </div>
     );
   }

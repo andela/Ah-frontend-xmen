@@ -32,6 +32,9 @@ html, body{
   float: left;
   text-align: justify;
 }
+textarea {
+  resize: none !important;
+}
 .dp{
   width: 320px;
   float: right;
@@ -102,7 +105,7 @@ html, body{
 }
 
 .quill.ql-editor {
-    transition: box-shadow .15s ease; 
+    transition: box-shadow .15s ease;
     border: 0;
     box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
 }
@@ -131,8 +134,16 @@ html, body{
     font-weight: 400 !important;
 }
 
+.fa-pen{
+  font-size: 17px;
+  color: #6457dd;
+}
+
+.fa-trash-alt{
+  font-size: 20px;
+}
+
 .fa-pen, .fa-trash-alt{
-  font-size: 25px;
   cursor: pointer;
   transition: .3s;
 }
@@ -148,7 +159,7 @@ html, body{
   transition: .3s;
 }
 
-.fa-trash-alt:focus {
+.fa-pen:focus, .fa-trash-alt:focus {
   outline: none;
 }
 
@@ -169,7 +180,6 @@ html, body{
   background: #ffffff;
   text-align: center;
   transition: all 0.25s ease-out;
-  z-index: 1;
   transform: scale(0);
   transform-origin: 100% 0;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
