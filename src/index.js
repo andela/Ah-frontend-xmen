@@ -10,6 +10,7 @@ import './assets/css/socialAuth.css';
 import './assets/css/comments.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './assets/css/react-tags.css';
+import 'react-toastify/dist/ReactToastify.css';
 import 'react-quill/dist/quill.snow.css';
 
 
